@@ -1,0 +1,12 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "lua"],
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": false,
+  "languageserver": {
+      "dockerfile": {
+          "command": "docker-langserver",
+          "filetypes": ["dockerfile"],
+          "args": ["--stdio"]
+      }
+  }
+}
