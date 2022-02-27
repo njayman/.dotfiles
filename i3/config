@@ -1,4 +1,6 @@
-font pango:monospace 8
+# Font
+font pango:Hack 9
+
 for_window [class="^.*"] border pixel 0
 gaps inner 10
 
@@ -186,10 +188,10 @@ bar {
                 binding_mode       #FF5555 #FF5555 #F8F8F2
         }
         status_command bumblebee-status \
-     -m cpu memory pasink pasource time battery \
-     -p time.format="%H:%M" \
+     -m messagereceiver cpu memory xrandr arch_update traffic brightness pasink pasource weather datetimetz battery \
+     -p datetimetz.format="%d %b, %Y - %a - %I:%M %p" datetimetz.timezone="Asia/Dhaka" weather.location="Dhaka" \
      -t dracula-powerline \
-     -a cpu memory
+     -a cpu memory messagereceiver traffic
 }
 
 # exec i3-config-wizard
