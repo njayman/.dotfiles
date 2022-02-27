@@ -84,6 +84,9 @@ bindsym Mod4+a focus parent
 # focus the child container
 #bindsym Mod4+d focus child
 
+popup_during_fullscreen smart
+
+
 # move the currently focused window to the scratchpad
 bindsym Mod4+Shift+minus move scratchpad
 
@@ -176,6 +179,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 bar {
+        position top
         colors {
                 background #282A36
                 statusline #F8F8F2
@@ -191,7 +195,7 @@ bar {
      -m messagereceiver cpu memory xrandr arch_update traffic brightness pasink pasource weather datetimetz battery \
      -p datetimetz.format="%d %b, %Y - %a - %I:%M %p" datetimetz.timezone="Asia/Dhaka" weather.location="Dhaka" \
      -t dracula-powerline \
-     -a cpu memory messagereceiver traffic
+     -a cpu memory messagereceiver
 }
 
 # exec i3-config-wizard
