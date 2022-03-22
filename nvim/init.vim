@@ -16,7 +16,7 @@ set signcolumn=yes
 set hidden
 set nobackup
 set nowritebackup
-
+set mouse=n
 set cmdheight=2
 
 call plug#begin('~/.config/nvim/plugged')
