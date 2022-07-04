@@ -1,0 +1,244 @@
+# Font
+font pango:Hack 9
+
+for_window [class="^.*"] border pixel 2
+for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt
+for_window [window_role="buddy_list"] focus; resize shrink width 50 ppt
+for_window [window_role="conversation"] focus; move absolute left
+
+gaps inner 10
+
+exec --no-startup-id dex --autostart --environment i3
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id picom
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id flameshot
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id copyq
+exec --no-startup-id skypeforlinux
+# exec --no-startup-id prospect-mail
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+set $up l
+set $down k
+set $left j
+set $right semicolon
+# floating_modifier Mod4
+bindsym Mod4+Return exec kitty
+bindsym Mod4+Shift+q kill
+bindsym Mod4+d exec "rofi -modi drun,run -show drun"
+bindsym Mod4+Shift+d exec "rofi -modi drun,run -show run"
+
+# change focus
+bindsym Mod4+$left focus left
+bindsym Mod4+$down focus down
+bindsym Mod4+$up focus up
+bindsym Mod4+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
+
+# move focused window
+bindsym Mod4+Shift+$left move left
+bindsym Mod4+Shift+$down move down
+bindsym Mod4+Shift+$up move up
+bindsym Mod4+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
+
+# split in horizontal orientation
+bindsym Mod4+h split h
+
+# split in vertical orientation
+bindsym Mod4+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Mod4+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym Mod4+s layout stacking
+bindsym Mod4+w layout tabbed
+bindsym Mod4+e layout toggle split
+
+# toggle tiling / floating
+bindsym Mod4+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym Mod4+space focus mode_toggle
+
+# focus the parent container
+bindsym Mod4+a focus parent
+
+# focus the child container
+#bindsym Mod4+d focus child
+
+popup_during_fullscreen smart
+
+
+# move the currently focused window to the scratchpad
+bindsym Mod4+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod4+minus scratchpad show
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym Mod4+1 workspace number $ws1
+bindsym Mod4+2 workspace number $ws2
+bindsym Mod4+3 workspace number $ws3
+bindsym Mod4+4 workspace number $ws4
+bindsym Mod4+5 workspace number $ws5
+bindsym Mod4+6 workspace number $ws6
+bindsym Mod4+7 workspace number $ws7
+bindsym Mod4+8 workspace number $ws8
+bindsym Mod4+9 workspace number $ws9
+bindsym Mod4+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym Mod4+Shift+1 move container to workspace number $ws1
+bindsym Mod4+Shift+2 move container to workspace number $ws2
+bindsym Mod4+Shift+3 move container to workspace number $ws3
+bindsym Mod4+Shift+4 move container to workspace number $ws4
+bindsym Mod4+Shift+5 move container to workspace number $ws5
+bindsym Mod4+Shift+6 move container to workspace number $ws6
+bindsym Mod4+Shift+7 move container to workspace number $ws7
+bindsym Mod4+Shift+8 move container to workspace number $ws8
+bindsym Mod4+Shift+9 move container to workspace number $ws9
+bindsym Mod4+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym Mod4+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym Mod4+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or Mod4+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod4+r mode "default"
+}
+
+bindsym Mod4+r mode "resize"
+bindsym Mod4+n exec --no-startup-id nemo
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+# class                 border  bground text    indicator child_border
+client.focused          #7aa2f7 #7aa2f7 #c0caf5 #7aa2f7   #7aa2f7
+client.focused_inactive #44475A #44475A #c0caf5 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #c0caf5 #282A36   #282A36
+client.urgent           #44475A #f7768e #c0caf5 #f7768e   #f7768e 
+client.placeholder      #282A36 #282A36 #c0caf5 #282A36   #282A36
+
+client.background       #c0caf2
+
+# bar {
+#         font pango:DejaVu Sans Mono, FontAwesome 8
+        # font        pango:Helvetica 8
+        # position    top
+        # colors      {
+                        # background #000000
+                        # background #1e222b
+                        # statusline #c0caf5
+                        # separator  #44475A
+
+                        # focused_workspace  #44475A #44475A #c0caf5
+                        # active_workspace   #282A36 #44475A #c0caf5
+                        # inactive_workspace #282A36 #282A36 #c0caf5
+                        # urgent_workspace   #f7768e #f7768e #c0caf5
+                        # binding_mode       #f7768e #f7768e #c0caf5
+                    # }
+        # status_command bumblebee-status \
+     # -m messagereceiver cpu memory xrandr arch_update traffic brightness weather datetimetz pasink pasource \
+     # -p datetimetz.format="%d %b, %Y %a %I:%M %p" datetimetz.timezone="Asia/Dhaka" weather.location="Dhaka" \
+     # -t dracula-powerline \
+     # -a cpu memory messagereceiver
+# }
+
+# exec i3-config-wizard
+# colors = {
+#     none = "NONE",
+#     bg_dark = "#1f2335",
+#     bg = "#24283b",
+#     bg_highlight = "#292e42",
+#     terminal_black = "#414868",
+#     fg = "#c0caf5",
+#     fg_dark = "#a9b1d6",
+#     fg_gutter = "#3b4261",
+#     dark3 = "#545c7e",
+#     comment = "#565f89",
+#     dark5 = "#737aa2",
+#     blue0 = "#3d59a1",
+#     blue = "#7aa2f7",
+#     cyan = "#7dcfff",
+#     blue1 = "#2ac3de",
+#     blue2 = "#0db9d7",
+#     blue5 = "#89ddff",
+#     blue6 = "#B4F9F8",
+#     blue7 = "#394b70",
+#     magenta = "#bb9af7",
+#     magenta2 = "#ff007c",
+#     purple = "#9d7cd8",
+#     orange = "#ff9e64",
+#     yellow = "#e0af68",
+#     green = "#9ece6a",
+#     green1 = "#73daca",
+#     green2 = "#41a6b5",
+#     teal = "#1abc9c",
+#     red = "#f7768e",
+#     red1 = "#db4b4b",
+#     git = { change = "#6183bb", add = "#449dab", delete = "#914c54", conflict = "#bb7a61" },
+#     gitSigns = { add = "#164846", change = "#394b70", delete = "#823c41" },
+#   }
