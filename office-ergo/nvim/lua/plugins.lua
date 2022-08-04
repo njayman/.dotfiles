@@ -7,11 +7,38 @@ return require('packer').startup(function(use)
     -- Wakatime/nvim
     use 'wakatime/vim-wakatime'
 
+    -- Git
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
+    -- Trouble
+    --[[ use {
+        'folke/trouble.nvim',
+        configs = function()
+            require("trouble").setup()
+        end
+    } ]]
+
+    -- indent blankline
+    use "lukas-reineke/indent-blankline.nvim"
+
     -- Icons
     -- use 'ryanoasis/vim-devicons'
 
     -- Theme
-    use 'folke/tokyonight.nvim'
+    -- use 'folke/tokyonight.nvim'
+    use {
+        'projekt0n/github-nvim-theme',
+        config = function()
+            require('github-theme').setup {
+                theme_style = "dimmed"
+            }
+        end
+    }
 
     -- Treesetter
     use {
@@ -26,6 +53,17 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    -- Bufferline
+    use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
+
+    -- Scope
+    use {
+        "tiagovla/scope.nvim",
+        config = function()
+            require("scope").setup()
+        end
+    }
 
     -- Whichkey
     use {
@@ -47,40 +85,89 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- fidget
+    use {
+        'j-hui/fidget.nvim',
+        config = function()
+            require "fidget".setup {}
+        end
+    }
+    -- LSP
     -- lsp color
     use 'folke/lsp-colors.nvim'
+    use 'p00f/nvim-ts-rainbow'
+
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        requires = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/nvim-lsp-installer' },
+
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
+
+            -- Snippets
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
+        }
+    }
 
     -- lsp config
-    use 'neovim/nvim-lspconfig'
+    -- use 'neovim/nvim-lspconfig'
+
+    -- Null lsp
+    -- use 'jose-elias-alvarez/null-ls.nvim'
+
+    -- Formatter
+    -- use 'mhartington/formatter.nvim'
+
+    -- lsp installer
+    -- use "williamboman/nvim-lsp-installer"
+
+    -- mason
+    -- use "williamboman/mason.nvim"
+
+    -- mason lsp config
+    -- use "williamboman/mason-lspconfig.nvim"
 
     -- Autocompletion
+
     -- Nvim cmp
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
+    -- use 'hrsh7th/cmp-nvim-lsp'
+    -- use 'hrsh7th/cmp-buffer'
+    -- use 'hrsh7th/cmp-path'
+    -- use 'hrsh7th/cmp-cmdline'
+    -- use 'hrsh7th/nvim-cmp'
+
+    -- Auto pairs
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
 
     -- Snippets
-    use 'L3MON4D3/LuaSnip'
-    use { 'saadparwaiz1/cmp_luasnip' }
+    -- use 'L3MON4D3/LuaSnip'
+    -- use 'rafamadriz/friendly-snippets'
+    -- use { 'saadparwaiz1/cmp_luasnip' }
+
     -- Comments
     use {
         'numToStr/Comment.nvim',
         config = function()
-            require('Comment').setup {
-                opleader = {
-                    line = 'gc',
-                    block = 'gb'
-                },
-                mappings = {
-                    basic = true,
-                    extra = true,
-                    extended = false
-                }
-            }
+            require('Comment').setup()
         end
     }
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+    -- Debugger
+    use 'puremourning/vimspector'
 
 end)
 -- local plug = vim.fn['plug#']
