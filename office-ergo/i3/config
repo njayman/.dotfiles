@@ -1,5 +1,5 @@
 # Font
-font pango:Hack 9
+font pango:JetBrains Mono 9
 
 for_window [class="^.*"] border pixel 2
 # for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt
