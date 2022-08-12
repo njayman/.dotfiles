@@ -9,6 +9,12 @@ return require('packer').startup(function(use)
 
     -- Git
     use {
+        'dinhhuy258/git.nvim',
+        config = function()
+            require "git".setup()
+        end
+    }
+    use {
         'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup()
@@ -92,6 +98,13 @@ return require('packer').startup(function(use)
             require "fidget".setup {}
         end
     }
+
+    -- Lualine
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
     -- LSP
     -- lsp color
     use 'folke/lsp-colors.nvim'
@@ -150,6 +163,10 @@ return require('packer').startup(function(use)
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
+    }
+    use {
+        "windwp/nvim-ts-autotag",
+        config = function() require "nvim-ts-autotag".setup() end
     }
 
     -- Snippets

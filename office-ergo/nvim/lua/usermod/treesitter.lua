@@ -12,6 +12,28 @@ configs.setup {
         enable = true,
         enable_autocmd = false
     },
+    ensure_installed = {
+        "yaml",
+        "c",
+        "prisma",
+        "svelte",
+        "python",
+        "tsx",
+        "cpp",
+        "javascript",
+        "vim",
+        "rust",
+        "scss",
+        "html",
+        "sql",
+        "json",
+        "graphql",
+        "markdown",
+        "lua",
+        "typescript",
+        "go",
+        "css"
+    },
     indent = {
         enable = true
     },

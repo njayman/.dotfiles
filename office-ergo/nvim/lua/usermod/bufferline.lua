@@ -22,7 +22,7 @@ bufferline.setup {
     }
 }
 
-map('n', '<leader>bp', [[:BufferLinePick<CR>]], { noremap = true })
+map('n', 'gs', [[:BufferLinePick<CR>]], { noremap = true })
 map('n', '<leader>b]', [[:BufferLineMoveNext<CR>]], { noremap = true })
 map('n', '<leader>b[', [[:BufferLineMovePrev<CR>]], { noremap = true })
 map('n', '<leader>be', [[:BufferLineSortByExtension<CR>]], { noremap = true })
