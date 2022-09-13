@@ -22,12 +22,12 @@ return require('packer').startup(function(use)
     }
 
     -- Trouble
-    --[[ use {
+    use {
         'folke/trouble.nvim',
         configs = function()
             require("trouble").setup()
         end
-    } ]]
+    }
 
     -- indent blankline
     use "lukas-reineke/indent-blankline.nvim"
@@ -197,6 +197,13 @@ return require('packer').startup(function(use)
 
     -- Debugger
     use 'puremourning/vimspector'
+
+    -- vim-be-good
+    use { 'ThePrimeagen/vim-be-good',
+        config = function()
+            require "vim-be-good".setup()
+        end
+    }
 
 end)
 -- local plug = vim.fn['plug#']
