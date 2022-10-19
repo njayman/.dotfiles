@@ -223,11 +223,11 @@ return require('packer').startup(function(use)
     use 'puremourning/vimspector'
 
     -- vim-be-good
-    use { 'ThePrimeagen/vim-be-good',
+    --[[ use { 'ThePrimeagen/vim-be-good',
         config = function()
             require "vim-be-good".setup()
         end
-    }
+    } ]]
 
 end)
 -- local plug = vim.fn['plug#']
