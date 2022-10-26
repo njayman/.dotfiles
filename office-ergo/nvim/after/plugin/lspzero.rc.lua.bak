@@ -18,12 +18,12 @@ lsp.set_preferences({
 })
 lsp.nvim_workspace()
 lsp.setup()
-
-local handlers = {
-    ['client/registerCapability'] = function(_, _, _, _)
-        return { result = nil, error = nil }
-    end,
-}
-
-lsp.configure("eslint_d", { handlers = handlers })
-lsp.configure("prettierd", { handlers = handlers })
+--
+-- local handlers = {
+--     ['client/registerCapability'] = function(_, _, _, _)
+--         return { result = nil, error = nil }
+--     end,
+-- }
+--
+-- lsp.configure("eslint_d", { handlers = handlers })
+-- lsp.configure("prettierd", { handlers = handlers })
