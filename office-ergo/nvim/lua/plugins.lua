@@ -8,18 +8,8 @@ return require('packer').startup(function(use)
     use 'wakatime/vim-wakatime'
 
     -- Git
-    use {
-        'dinhhuy258/git.nvim',
-        config = function()
-            require "git".setup()
-        end
-    }
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup()
-        end
-    }
+    use 'dinhhuy258/git.nvim'
+    use 'lewis6991/gitsigns.nvim'
 
     -- Trouble
     use {
@@ -41,7 +31,7 @@ return require('packer').startup(function(use)
         'projekt0n/github-nvim-theme',
         config = function()
             require('github-theme').setup {
-                theme_style = "dimmed"
+                theme_style = "dark"
             }
         end
     }
@@ -151,7 +141,10 @@ return require('packer').startup(function(use)
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
-            { 'williamboman/nvim-lsp-installer' },
+            -- { 'williamboman/nvim-lsp-installer' },
+            { 'williamboman/mason.nvim' },
+            { "williamboman/mason-lspconfig.nvim" },
+
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },

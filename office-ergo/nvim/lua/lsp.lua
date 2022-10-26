@@ -6,6 +6,21 @@ local lsp = require('lsp-zero')
 --     opt.cmd = { "yarn", "exec", unpack(eslint_config.default_config.cmd) }
 -- }
 
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+
+require("mason-lspconfig").setup({
+    ensure_installed = { "sumneko_lua", "pyright", "tsserver", "cssls", "bashls", "html", "jsonls", "marksman",
+        "prismals", "sqlls", "rust_analyzer", "yamlls", "lemminx" }
+})
+
 lsp.set_preferences({
     suggest_lsp_servers = true,
     setup_servers_on_start = true,
@@ -23,6 +38,16 @@ lsp.set_preferences({
 })
 lsp.nvim_workspace()
 lsp.setup()
+
+local handlers = {
+    ['client/registerCapability'] = function(_, _, _, _)
+        return { result = nil, error = nil }
+    end,
+}
+
+lsp.configure("eslint_d", { handlers = handlers })
+lsp.configure("prettierd", { handlers = handlers })
+
 
 vim.diagnostic.config()
 
