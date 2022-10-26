@@ -12,12 +12,7 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim'
 
     -- Trouble
-    use {
-        'folke/trouble.nvim',
-        configs = function()
-            require("trouble").setup()
-        end
-    }
+    use 'folke/trouble.nvim'
 
     -- indent blankline
     use "lukas-reineke/indent-blankline.nvim"
@@ -27,13 +22,17 @@ return require('packer').startup(function(use)
 
     -- Theme
     -- use 'folke/tokyonight.nvim'
+    -- use {
+    --     'projekt0n/github-nvim-theme',
+    --     config = function()
+    --         require('github-theme').setup {
+    --             theme_style = "dark"
+    --         }
+    --     end
+    -- }
     use {
-        'projekt0n/github-nvim-theme',
-        config = function()
-            require('github-theme').setup {
-                theme_style = "dark"
-            }
-        end
+        "catppuccin/nvim",
+        as = "catppuccin",
     }
 
     -- -- Zen mode
@@ -55,28 +54,7 @@ return require('packer').startup(function(use)
     }
 
     -- Treesetter playground
-    use { 'nvim-treesitter/playground', config = function()
-        require "nvim-treesitter.configs".setup {
-            playground = {
-                enable = true,
-                disable = {},
-                updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-                persist_queries = false, -- Whether the query persists across vim sessions
-                keybindings = {
-                    toggle_query_editor = 'o',
-                    toggle_hl_groups = 'i',
-                    toggle_injected_languages = 't',
-                    toggle_anonymous_nodes = 'a',
-                    toggle_language_display = 'I',
-                    focus_language = 'f',
-                    unfocus_language = 'F',
-                    update = 'R',
-                    goto_node = '<cr>',
-                    show_help = '?',
-                },
-            }
-        }
-    end }
+    use 'nvim-treesitter/playground'
 
     -- Telescope
     use {
@@ -90,24 +68,10 @@ return require('packer').startup(function(use)
     use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
 
     -- Scope
-    use {
-        "tiagovla/scope.nvim",
-        config = function()
-            require("scope").setup()
-        end
-    }
+    use "tiagovla/scope.nvim"
 
     -- Whichkey
-    use {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    }
+    use "folke/which-key.nvim"
 
     -- File tree
     use {
@@ -118,12 +82,7 @@ return require('packer').startup(function(use)
     }
 
     -- fidget
-    use {
-        'j-hui/fidget.nvim',
-        config = function()
-            require "fidget".setup {}
-        end
-    }
+    use 'j-hui/fidget.nvim'
 
     -- Lualine
     use {
@@ -189,14 +148,9 @@ return require('packer').startup(function(use)
     -- use 'hrsh7th/nvim-cmp'
 
     -- Auto pairs
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
-    use {
-        "windwp/nvim-ts-autotag",
-        config = function() require "nvim-ts-autotag".setup() end
-    }
+    use "windwp/nvim-autopairs"
+
+    use "windwp/nvim-ts-autotag"
 
     -- Snippets
     -- use 'L3MON4D3/LuaSnip'
@@ -204,12 +158,7 @@ return require('packer').startup(function(use)
     -- use { 'saadparwaiz1/cmp_luasnip' }
 
     -- Comments
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+    use 'numToStr/Comment.nvim'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     -- Debugger

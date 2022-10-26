@@ -2,8 +2,10 @@ local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
     return
 end
+
 -- Setup Telescope
-local map = vim.api.nvim_set_keymap
+local builtin = require("telescope.builtin");
+local map = vim.keymap.set
 
 telescope.setup {
     extensions = {
@@ -17,10 +19,20 @@ telescope.setup {
     }
 }
 
-map('n', '<leader>fg', ":lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
-map('n', '<leader>ff', ":lua require('telescope.builtin').find_files()<cr>", { noremap = true })
-map('n', '<leader>gf', ":lua require('telescope.builtin').git_files()<cr>", { noremap = true })
-map('n', '<leader>fb', ":lua require('telescope.builtin').buffers()<cr>", { noremap = true })
-map('n', '<leader>fh', ":lua require('telescope.builtin').help_tags()<cr>", { noremap = true })
+map('n', '<leader>fg', function()
+    builtin.live_grep()
+end, { noremap = true })
+map('n', '<leader>ff', function()
+    builtin.find_files()
+end, { noremap = true })
+map('n', '<leader>gf', function()
+    builtin.git_files()
+end, { noremap = true })
+map('n', '<leader>fb', function()
+    builtin.buffers()
+end, { noremap = true })
+map('n', '<leader>fh', function()
+    builtin.help_tags()
+end, { noremap = true })
 
 telescope.load_extension('fzf')

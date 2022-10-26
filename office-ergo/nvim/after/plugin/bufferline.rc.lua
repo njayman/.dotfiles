@@ -1,8 +1,6 @@
-local map = vim.api.nvim_set_keymap
+local status, bufferline = pcall(require, "bufferline")
+if (not status) then return end
 
-local bufferline = require "bufferline"
-
-require("scope").setup()
 
 bufferline.setup {
     options = {
@@ -21,6 +19,8 @@ bufferline.setup {
         },
     }
 }
+
+local map = vim.api.nvim_set_keymap
 
 map('n', 'gs', [[:BufferLinePick<CR>]], { noremap = true })
 map('n', '<leader>b]', [[:BufferLineMoveNext<CR>]], { noremap = true })

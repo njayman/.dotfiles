@@ -1,0 +1,29 @@
+local status, lsp = pcall(require, "lsp-zero")
+if (not status) then return end
+
+lsp.set_preferences({
+    suggest_lsp_servers = true,
+    setup_servers_on_start = true,
+    set_lsp_keymaps = true,
+    configure_diagnostics = true,
+    cmp_capabilities = true,
+    manage_nvim_cmp = true,
+    call_servers = 'local',
+    sign_icons = {
+        error = '✘',
+        warn = '▲',
+        hint = '⚑',
+        info = ''
+    }
+})
+lsp.nvim_workspace()
+lsp.setup()
+
+local handlers = {
+    ['client/registerCapability'] = function(_, _, _, _)
+        return { result = nil, error = nil }
+    end,
+}
+
+lsp.configure("eslint_d", { handlers = handlers })
+lsp.configure("prettierd", { handlers = handlers })
