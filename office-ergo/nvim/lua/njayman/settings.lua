@@ -6,4 +6,4 @@ vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.markdown_fenced_languages = {
     "ts=typescript"
 }
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
