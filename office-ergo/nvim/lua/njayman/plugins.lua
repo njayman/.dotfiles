@@ -7,6 +7,12 @@ return require('packer').startup(function(use)
     -- Wakatime/nvim
     use 'wakatime/vim-wakatime'
 
+    -- tabnine
+    use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
+
+    -- tmux
+    use 'christoomey/vim-tmux-navigator'
+
     -- Git
     use 'dinhhuy258/git.nvim'
     use 'lewis6991/gitsigns.nvim'
@@ -95,31 +101,28 @@ return require('packer').startup(function(use)
     use 'folke/lsp-colors.nvim'
     use 'p00f/nvim-ts-rainbow'
 
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            -- { 'williamboman/nvim-lsp-installer' },
-            { 'williamboman/mason.nvim' },
-            { "williamboman/mason-lspconfig.nvim" },
+    -- use {
+    --     'VonHeikemen/lsp-zero.nvim',
+    -- }
+    use { 'neovim/nvim-lspconfig' }
+    -- { 'williamboman/nvim-lsp-installer' },
+    use { 'williamboman/mason.nvim' }
+    use { "williamboman/mason-lspconfig.nvim" }
+    use { "WhoIsSethDaniel/mason-tool-installer.nvim" }
 
 
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'hrsh7th/cmp-cmdline' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
+    -- Autocompletion
+    use { 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-buffer' }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-cmdline' }
+    use { 'saadparwaiz1/cmp_luasnip' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/cmp-nvim-lua' }
 
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        }
-    }
-
+    -- Snippets
+    use { 'L3MON4D3/LuaSnip' }
+    use { 'rafamadriz/friendly-snippets' }
     -- lsp config
     -- use 'neovim/nvim-lspconfig'
 
@@ -163,7 +166,7 @@ return require('packer').startup(function(use)
     use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     -- Debugger
-    use 'puremourning/vimspector'
+    -- use 'puremourning/vimspector'
 
     -- vim-be-good
     --[[ use { 'ThePrimeagen/vim-be-good',
@@ -173,45 +176,3 @@ return require('packer').startup(function(use)
     } ]]
 
 end)
--- local plug = vim.fn['plug#']
-
--- vim.call('plug#begin', '~/.config/nvim/plugged')
-
--- Plug 'ThePrimeagen/vim-be-good'
--- Plug('neoclide/coc.nvim', {branch = 'release'})
--- Plug 'SirVer/ultisnips'
--- Plug 'mlaursen/vim-react-snippets'
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug('nvim-telescope/telescope.nvim')
--- Plug('nvim-treesitter/nvim-treesitter', {
---     ['do'] = function()
---         vim.cmd('call vim_treesitter#TSInstall()')
---     end
--- })
--- Plug('nvim-treesitter/playground')
--- Plug('folke/tokyonight.nvim', {branch = 'main' })
--- Plug('lukas-reineke/indent-blankline.nvim')
--- Plug('tpope/vim-commentary')
--- Plug('maxmellon/vim-jsx-pretty')
--- Plug('suy/vim-context-commentstring')
--- Plug('tpope/vim-fugitive')
--- Plug('preservim/nerdtree')
--- Plug('Xuyuanp/nerdtree-git-plugin')
--- Plug('PhilRunninger/nerdtree-visual-selection')
--- Plug('puremourning/vimspector')
--- Plug('mustache/vim-mustache-handlebars')
--- -- Plug('PhilRunninger/nerdtree-buffer-ops')
-
--- Plug('github/copilot.vim')
-
--- Plug('voldikss/vim-floaterm')
-
--- Plug('folke/which-key.nvim')
-
--- -- Icon plugin
-
--- -- Svelte syntax highight
--- Plug('burner/vim-svelte')
-
--- vim.call('plug#end')

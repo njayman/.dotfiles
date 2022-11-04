@@ -48,7 +48,8 @@ ts.setup {
         "lua",
         "typescript",
         "go",
-        "css"
+        "css",
+        "query"
     },
     indent = {
         enable = true
