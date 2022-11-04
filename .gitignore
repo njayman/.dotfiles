@@ -2,6 +2,6 @@ nvim/plugged
 nvim/plugged/*
 plugged
 plugged/*
-terms/tmux/tmux/plugins/*
-!terms/tmux/tmux/plugins/.gitkeep
+office-ergo/tmux/plugins/*
+!office-ergo/tmux/plugins/.gitkeep
 
