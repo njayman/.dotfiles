@@ -4,4 +4,4 @@ plugged
 plugged/*
 office-ergo/tmux/plugins/*
 !office-ergo/tmux/plugins/.gitkeep
-
+packer_compiled.lua 
