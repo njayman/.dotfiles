@@ -1,4 +1,6 @@
 local status, git = pcall(require, "git")
-if (not status) then return end
+if not status then
+	return
+end
 
 git.setup()

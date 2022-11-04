@@ -1,7 +1,7 @@
 local map = vim.api.nvim_set_keymap
 
-map('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
-map('n', '<leader>tn', [[:tabnew | term<CR>]], { noremap = true })
+map("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
+map("n", "<leader>tn", [[:tabnew | term<CR>]], { noremap = true })
 -- map('n', 'th', [[tabfirst]], { noremap = true })
 -- map('n', 'tk', [[tabnext<CR>]], { noremap = true })
 -- map('n', 'tl', [[tabprev<CR>]], { noremap = true })
