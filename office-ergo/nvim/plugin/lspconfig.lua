@@ -17,23 +17,20 @@ end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
+local on_attach = function()
+	local opts = { noremap = true, silent = true, buffer = 0 }
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-	--Enable completion triggered by <c-x><c-o>
-	--local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-	--buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
 
-	-- Mappings.
-	local opts = { noremap = true, silent = true }
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts)
+	vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, opts)
+
+	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+	vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -48,7 +45,7 @@ nvim_lsp.tsserver.setup({
 nvim_lsp.sumneko_lua.setup({
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
-		on_attach(client, bufnr)
+		on_attach()
 		enable_format_on_save(client, bufnr)
 	end,
 	settings = {

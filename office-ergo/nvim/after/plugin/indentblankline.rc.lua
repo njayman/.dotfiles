@@ -24,4 +24,5 @@ idbl.setup({
 		"IndentBlanklineIndent5",
 		"IndentBlanklineIndent6",
 	},
+	filetype_exclude = { "dashboard" },
 })

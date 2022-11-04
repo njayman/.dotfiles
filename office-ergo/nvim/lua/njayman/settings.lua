@@ -6,4 +6,5 @@ vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.markdown_fenced_languages = {
 	"ts=typescript",
 }
+vim.g.dashboard_default_executive = "telescope"
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
