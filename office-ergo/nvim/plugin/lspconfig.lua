@@ -35,8 +35,21 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+nvim_lsp.eslint.setup({
+	settings = {
+		codeActionsOnSave = {
+			enabled = true,
+			mode = "all",
+		},
+		run = "onSave",
+	},
+})
+
 nvim_lsp.tsserver.setup({
-	on_attach = on_attach,
+	on_attach = function(client, bufnr)
+		on_attach()
+		enable_format_on_save(client, bufnr)
+	end,
 	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 	cmd = { "typescript-language-server", "--stdio" },
 	capabilities = capabilities,

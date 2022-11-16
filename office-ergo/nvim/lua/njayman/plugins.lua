@@ -166,13 +166,10 @@ return require("packer").startup(function(use)
 
     -- Debugger
     -- use 'puremourning/vimspector'
+    use("mfussenegger/nvim-dap")
 
     -- vim-be-good
-    --[[ use { 'ThePrimeagen/vim-be-good',
-        config = function()
-            require "vim-be-good".setup()
-        end
-    } ]]
+    -- use("ThePrimeagen/vim-be-good")
 
     -- refactoring
     use("napmn/react-extract.nvim")
