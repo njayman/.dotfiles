@@ -1,0 +1,103 @@
+local deps_ok, dap, dapui, mason_dap = pcall(function()
+    return require("dap"), require("dapui"), require("mason-nvim-dap")
+end)
+
+if not deps_ok then
+    return
+end
+
+mason_dap.setup({
+    automatic_installation = true,
+    ensure_installed = { "chrome", "node2", "firefox" },
+})
+dapui.setup()
+
+local map = vim.keymap.set
+
+-- Adapters: Node and TypeScript
+dap.adapters.node2 = {
+    type = "executable",
+    command = "node",
+    args = {
+        os.getenv("HOME") .. "/.local/share/nvim/mason/packages/node-debug2-adapter/out/src/nodeDebug.js",
+    },
+}
+
+-- Adapters: Chrome
+dap.adapters.chrome = {
+    type = "executable",
+    command = "node",
+    args = {
+        os.getenv("HOME") .. "/.local/share/nvim/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js",
+    },
+}
+
+dap.configurations.javascript = {
+    {
+        type = "node2",
+        request = "launch",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        console = "integratedTerminal",
+    },
+}
+
+dap.configurations.javascript = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}",
+    },
+}
+
+dap.configurations.javascriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}",
+    },
+}
+
+dap.configurations.typescriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}",
+    },
+}
+
+map({ "n" }, "<leader>dt", dapui.toggle, { noremap = true })
+map({ "n" }, "<leader>dc", dap.continue, { noremap = true })
+map({ "n" }, "<leader>do", dap.step_over, { noremap = true })
+map({ "n" }, "<leader>di", dap.step_into, { noremap = true })
+map({ "n" }, "<leader>du", dap.step_out, { noremap = true })
+map({ "n" }, "<leader>db", dap.toggle_breakpoint, { noremap = true })
+map(
+    { "n" },
+    "<leader>dB",
+    "<cmd>lua require'dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+    { noremap = true }
+)
+
+dap.set_log_level("TRACE")
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open({})
+end

@@ -166,7 +166,15 @@ return require("packer").startup(function(use)
 
 	-- Debugger
 	-- use 'puremourning/vimspector'
-	use("mfussenegger/nvim-dap")
+	-- use("mfussenegger/nvim-dap")
+	-- use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+	-- use({
+	--     "microsoft/vscode-js-debug",
+	--     opt = true,
+	--     run = "npm install --legacy-peer-deps && npm run compile",
+	-- })
+	-- use("rcarriga/nvim-dap-ui")
+	-- use("jayp0521/mason-nvim-dap.nvim")
 
 	-- vim-be-good
 	-- use("ThePrimeagen/vim-be-good")

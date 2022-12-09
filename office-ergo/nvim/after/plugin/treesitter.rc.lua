@@ -31,6 +31,7 @@ ts.setup({
 		enable_autocmd = false,
 	},
 	ensure_installed = {
+		"toml",
 		"yaml",
 		"c",
 		"prisma",

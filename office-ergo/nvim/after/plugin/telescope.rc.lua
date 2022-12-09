@@ -49,5 +49,7 @@ map("n", "<leader>fh", function()
 	builtin.help_tags()
 end, { noremap = true })
 
+map("n", "<leader>bf", ":Telescope file_browser<CR>", { noremap = true })
+
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
