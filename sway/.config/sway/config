@@ -15,6 +15,10 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
 
+# float copyq
+
+for_window [app_id="com.github.hluk.copyq"] floating enable
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -253,6 +257,8 @@ bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ tog
 
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym $mod+Shift+b exec brave
+bindsym $mod+c exec copyq toggle
 
 include /etc/sway/config.d/*
 
