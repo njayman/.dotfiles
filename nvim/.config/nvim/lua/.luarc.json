@@ -1,0 +1,22 @@
+{
+    "workspace.library": [
+        "/home/njayman/.config/nvim",
+        "/home/njayman/.local/share/nvim/lazy/lazy.nvim",
+        "/home/njayman/.local/share/nvim/lazy/mason.nvim",
+        "/home/njayman/.local/share/nvim/lazy/Comment.nvim",
+        "/home/njayman/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/home/njayman/.local/share/nvim/lazy/plenary.nvim",
+        "/home/njayman/.local/share/nvim/lazy/telescope.nvim",
+        "/home/njayman/.local/share/nvim/lazy/nvim-ts-context-commentstring",
+        "/home/njayman/.local/share/nvim/lazy/nvim-treesitter",
+        "/home/njayman/.local/share/nvim/lazy/nvim-lspconfig",
+        "/home/njayman/.local/share/nvim/lazy/catppuccin",
+        "/usr/share/nvim/runtime",
+        "/usr/share/nvim/runtime/pack/dist/opt/matchit",
+        "/usr/lib/nvim",
+        "/home/njayman/.local/share/nvim/lazy/catppuccin/after",
+        "/home/njayman/.config/nvim/after",
+        "/home/njayman/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library"
+    ]
+}

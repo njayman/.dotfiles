@@ -1,0 +1,41 @@
+local configs = require("nvim-treesitter.configs")
+
+configs.setup({
+    ensure_installed = {
+        "c",
+        "css",
+        "html",
+        "javascript",
+        "bash",
+        "comment",
+        "cpp",
+        "dockerfile",
+        "diff",
+        "go",
+        "java",
+        "json",
+        "jsonc",
+        "lua",
+        "markdown",
+        "php",
+        "prisma",
+        "python",
+        "query",
+        "regex",
+        "rust",
+        "scss",
+        "sql",
+        "svelte",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "vue",
+        "yaml"
+    },
+    sync_install = false,
+    context_commentstring = {
+        enable = true,
+    },
+})
