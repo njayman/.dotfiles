@@ -1,0 +1,5 @@
+
+Zsh
+
+- dirhistory
+- shelfirm

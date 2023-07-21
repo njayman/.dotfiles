@@ -10,9 +10,12 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-# firefox picture in picture float
+# picture in picture float
 
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
+    floating enable, move position 877 450, sticky enable
+
+for_window [title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
 
 # float copyq
