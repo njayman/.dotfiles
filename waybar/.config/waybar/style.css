@@ -2,7 +2,7 @@
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: JetBrainsMono, FontAwesome;
+    font-family: JetBrainsMono, FontAwesome, HackNerdFont;
     font-size: 13px;
     color: @text;
 }

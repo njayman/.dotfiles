@@ -18,5 +18,10 @@
         "/home/njayman/.config/nvim/after",
         "/home/njayman/.local/state/nvim/lazy/readme",
         "${3rd}/luassert/library"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "love",
+        "love_command"
     ]
 }

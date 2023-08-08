@@ -22,6 +22,17 @@ for_window [title="^Picture-in-Picture$"] \
 
 for_window [app_id="com.github.hluk.copyq"] floating enable
 
+# GTK settings
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Catppuccin-Mocha-Standard-Green-dark'
+    gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+    gsettings set $gnome-schema cursor-theme 'phinger-cursors'
+    gsettings set $gnome-schema font-name 'JetBrains Mono'
+}
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -36,8 +47,8 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show run | xargs swaymsg exec
-set $drun wofi --show drun | xargs swaymsg exec
+set $menu wofi --show run --allow-images -D key_expand=Tab | xargs swaymsg exec
+set $drun wofi --show drun --allow-images -D key_expand=Tab | xargs swaymsg exec
 
 ### Output configuration
 #

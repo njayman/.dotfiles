@@ -52,8 +52,14 @@ local plugins = {
 },
     "dinhhuy258/git.nvim",
     "lewis6991/gitsigns.nvim",
+    "mhartington/formatter.nvim",
+    'mfussenegger/nvim-lint',
+    -- {
+    --     'creativenull/efmls-configs-nvim', dependencies = { "neovim/nvim-lspconfig" }
+    -- },
     {
-        'creativenull/efmls-configs-nvim', dependencies = { "neovim/nvim-lspconfig" }
+        "aserowy/tmux.nvim",
+        config = function() return require("tmux").setup() end
     }
 }
 

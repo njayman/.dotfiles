@@ -17,6 +17,8 @@ local on_attach = function()
 end
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
+local augroup_format_formatter = vim.api.nvim_create_augroup("FormatFormatter", { clear = true })
+
 local enable_format_on_save = function(_, bufnr)
     vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -28,6 +30,58 @@ local enable_format_on_save = function(_, bufnr)
     })
 end
 
+local enable_formatter_format_on_save = function(_, bufnr)
+    vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup_format,
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+    })
+end
+
+local trylint = function()
+    require("lint").try_lint()
+end
+
+lspconfig.rust_analyzer.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_format_on_save(client, bufnr)
+    end
+}
+
+lspconfig.marksman.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_format_on_save(client, bufnr)
+    end
+}
+
+lspconfig.jsonls.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_formatter_format_on_save(client, bufnr)
+    end
+}
+
+lspconfig.tsserver.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_formatter_format_on_save(client, bufnr)
+        trylint()
+    end
+}
+
+lspconfig.eslint.setup {}
+
+lspconfig.emmet_language_server.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_format_on_save(client, bufnr)
+    end
+}
 
 lspconfig.lua_ls.setup {
     on_attach = function(client, bufnr)
@@ -42,11 +96,11 @@ lspconfig.lua_ls.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
+                globals = { 'vim', "love" },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = { "${3rd}/love2d/library" },
                 checkThirdParty = false
             },
             -- Do not send telemetry data containing a randomized but unique identifier

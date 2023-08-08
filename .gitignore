@@ -2,7 +2,7 @@ nvim/plugged
 nvim/plugged/*
 plugged
 plugged/*
-office-ergo/tmux/plugins/*
-!office-ergo/tmux/plugins/.gitkeep
+tmux/.config/tmux/plugins/*
+!tmux/.config//tmux/plugins/.gitkeep
 office-ergo/nvim/plugin/packer_compiled.lua
 ranger/.config/ranger/plugins/ranger_udisk_menu/.git
