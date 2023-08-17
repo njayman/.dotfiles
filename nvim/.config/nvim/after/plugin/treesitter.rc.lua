@@ -38,4 +38,7 @@ configs.setup({
     context_commentstring = {
         enable = true,
     },
+    autotag = {
+        enable = true
+    }
 })

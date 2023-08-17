@@ -17,7 +17,7 @@ local on_attach = function()
 end
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
-local augroup_format_formatter = vim.api.nvim_create_augroup("FormatFormatter", { clear = true })
+-- local augroup_format_formatter = vim.api.nvim_create_augroup("FormatFormatter", { clear = true })
 
 local enable_format_on_save = function(_, bufnr)
     vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
@@ -45,18 +45,30 @@ local trylint = function()
     require("lint").try_lint()
 end
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 lspconfig.rust_analyzer.setup {
     on_attach = function(client, bufnr)
         on_attach()
         enable_format_on_save(client, bufnr)
-    end
+    end,
+    capabilities = capabilities
+}
+
+lspconfig.gopls.setup {
+    on_attach = function(client, bufnr)
+        on_attach()
+        enable_format_on_save(client, bufnr)
+    end,
+    capabilities = capabilities
 }
 
 lspconfig.marksman.setup {
     on_attach = function(client, bufnr)
         on_attach()
         enable_format_on_save(client, bufnr)
-    end
+    end,
+    capabilities = capabilities
 }
 
 lspconfig.jsonls.setup {
@@ -71,10 +83,20 @@ lspconfig.tsserver.setup {
         on_attach()
         enable_formatter_format_on_save(client, bufnr)
         trylint()
-    end
+    end,
+    cmd = { "typescript-language-server", "--stdio" },
+    capabilities = capabilities
 }
 
-lspconfig.eslint.setup {}
+lspconfig.eslint.setup {
+    settings = {
+        codeActionsOnSave = {
+            enabled = true,
+            mode = "all",
+        },
+        run = "onSave"
+    }
+}
 
 lspconfig.emmet_language_server.setup {
     on_attach = function(client, bufnr)
@@ -84,6 +106,7 @@ lspconfig.emmet_language_server.setup {
 }
 
 lspconfig.lua_ls.setup {
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
         on_attach()
         enable_format_on_save(client, bufnr)
