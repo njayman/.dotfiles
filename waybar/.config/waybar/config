@@ -1,11 +1,12 @@
 [{
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    // "height": 36, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
+    "margin": "5px",
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "sway/workspaces", "sway/mode", "hyprland/submap", "sway/scratchpad"],
+    "modules-left": ["hyprland/workspaces", "sway/workspaces", "sway/mode", "hyprland/submap", "sway/scratchpad"],
     "modules-center": ["sway/window", "hyprland/window"],
     "modules-right": ["pulseaudio", "network", "backlight", "battery", "clock", "tray"],
     "sway/window": {
@@ -170,7 +171,7 @@
 },{
     "layer":"top",
     "position": "bottom",
-    "height": 30,
+    "height": 32,
     "spacing": 4,
     "modules-left": ["cpu", "memory"],
     // "modules-center": [],

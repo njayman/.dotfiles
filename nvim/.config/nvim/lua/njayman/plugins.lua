@@ -91,7 +91,9 @@ local plugins = {
     {
         "aserowy/tmux.nvim",
         config = function() return require("tmux").setup() end
-    }
+    },
+    "theprimeagen/harpoon",
+    "uga-rosa/ccc.nvim"
 }
 
 local opts = {}

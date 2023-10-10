@@ -4,13 +4,13 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: JetBrainsMono, FontAwesome, HackNerdFont;
     font-size: 13px;
-    color: @text;
 }
 
 window#waybar {
-    background-color: shade(@base, 0.9);
-    border: 2px solid alpha(@crust, 0.3);
+    background-color: rgba(0, 0, 0, 0.9);
+    background: transparent;
     transition-duration: .5s;
+    padding: 5px;
 }
 
 window#waybar.hidden {
@@ -35,37 +35,44 @@ window#waybar.chromium {
     border: none;
 }
 
-button {
+/* button { */
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+    /* box-shadow: inset 0 -3px transparent; */
     /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
-}
+    /* border: none; */
+    /* border-radius: 0; */
+/* } */
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+/* button:hover { */
+    /* background: inherit; */
+    /* box-shadow: inset 0 -3px #ffffff; */
+/* } */
+
+#workspaces {
+    padding: 3px;
+    border-radius: 15px;
+    background-color: shade(@base, 0.8);
+    font-weight: bold;
 }
 
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    color: @text;
+    border-radius: 15px;
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+#workspaces button.active {
+    background: @green;
+    color: @crust;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
 #mode {
@@ -88,14 +95,13 @@ button:hover {
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#mpd {
+#mpd
+{
     padding: 0 10px;
-    color: #ffffff;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
+    border-radius: 15px;
+    font-weight: bold;
+    background: @surface0;
+    color: @text;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -111,20 +117,27 @@ button:hover {
 #clock {
 }
 
+#backlight {
+}
+
 #battery {
+    color: @text;
 }
 
 #battery.charging, #battery.plugged {
+    color: @green;
+
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: shade(@red, 0.3);
+        color: @overlay0;
     }
 }
 
 #battery.critical:not(.charging) {
+    color: @red;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -243,4 +256,11 @@ label:focus {
 
 #scratchpad.empty {
 	background-color: transparent;
+}
+
+#window {
+    color: @text;
+    background-color: alpha(@crust, 0.2);
+    border-radius: 15px;
+    padding: 5px 15px;
 }
