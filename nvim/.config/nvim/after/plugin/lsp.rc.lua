@@ -14,29 +14,10 @@ local on_attach = function()
 
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
     vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
-end
-
-local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
--- local augroup_format_formatter = vim.api.nvim_create_augroup("FormatFormatter", { clear = true })
-
-local enable_format_on_save = function(_, bufnr)
-    vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup_format,
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
-        end,
-    })
-end
-
-local enable_formatter_format_on_save = function(_, bufnr)
-    vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup_format,
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
+        pattern = "*",
+        callback = function(args)
+            require("conform").format({ bufnr = args.buf })
         end,
     })
 end
@@ -48,42 +29,28 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 lspconfig.rust_analyzer.setup {
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_format_on_save(client, bufnr)
-    end,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
 lspconfig.gopls.setup {
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_format_on_save(client, bufnr)
-    end,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
 lspconfig.marksman.setup {
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_format_on_save(client, bufnr)
-    end,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
 lspconfig.jsonls.setup {
     on_attach = function(client, bufnr)
         on_attach()
-        enable_formatter_format_on_save(client, bufnr)
     end
 }
 
 lspconfig.tsserver.setup {
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_formatter_format_on_save(client, bufnr)
-        trylint()
-    end,
+    on_attach = on_attach,
     cmd = { "typescript-language-server", "--stdio" },
     capabilities = capabilities
 }
@@ -99,18 +66,12 @@ lspconfig.eslint.setup {
 }
 
 lspconfig.emmet_language_server.setup {
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_format_on_save(client, bufnr)
-    end
+    on_attach = on_attach,
 }
 
 lspconfig.lua_ls.setup {
     capabilities = capabilities,
-    on_attach = function(client, bufnr)
-        on_attach()
-        enable_format_on_save(client, bufnr)
-    end,
+    on_attach = on_attach,
     settings = {
         Lua = {
             runtime = {

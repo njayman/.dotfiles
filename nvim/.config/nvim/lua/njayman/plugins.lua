@@ -9,6 +9,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+    "stevearc/conform.nvim",
     {
         "nvim-telescope/telescope.nvim",
         tag = '0.1.2',
