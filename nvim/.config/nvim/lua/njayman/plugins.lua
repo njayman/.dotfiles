@@ -13,6 +13,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+	"nvim-tree/nvim-web-devicons",
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
 	"stevearc/conform.nvim",
 	"stevearc/dressing.nvim",
 	{
