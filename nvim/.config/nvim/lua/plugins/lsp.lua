@@ -25,7 +25,7 @@ return {
 				"dockerls",
 				"docker_compose_language_service",
 				"efm",
-				"emmet_language_server",
+				"emmet_ls",
 				"eslint",
 				"tsserver",
 				"jsonls",
@@ -90,8 +90,9 @@ return {
 			capabilities = capabilities,
 		})
 
-		lspconfig.emmet_language_server.setup({
+		lspconfig.emmet_ls.setup({
 			on_attach = on_attach,
+			capabilities = capabilities,
 		})
 
 		lspconfig.lua_ls.setup({
