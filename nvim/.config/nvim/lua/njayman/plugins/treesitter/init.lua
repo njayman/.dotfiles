@@ -1,6 +1,12 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	dependencies = {
+		{
+			"kevinhwang91/nvim-ufo",
+			dependencies = { "kevinhwang91/promise-async" },
+		},
+	},
 	opts = {
 		ensure_installed = {
 			"bash",
@@ -36,6 +42,12 @@ return {
 
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup(opts)
+
+		require("ufo").setup({
+			provider_selector = function(_bufnr, _filetype, _buftype)
+				return { "treesitter", "indent" }
+			end,
+		})
 
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:

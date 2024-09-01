@@ -42,3 +42,6 @@ opt.inccommand = "split"
 opt.cursorline = true
 
 opt.scrolloff = 10
+
+opt.foldlevel = 99
+opt.foldlevelstart = 99

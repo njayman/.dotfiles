@@ -23,9 +23,11 @@
   "nvim-lint": { "branch": "master", "commit": "debabca63c0905b59ce596a55a8e33eafdf66342" },
   "nvim-lspconfig": { "branch": "master", "commit": "911167921d49cd5c1c9b2436031d0da3945e787f" },
   "nvim-treesitter": { "branch": "master", "commit": "e085c614fcd716eedb8e2e55bae2ccad4becd40d" },
+  "nvim-ufo": { "branch": "main", "commit": "b23a46aa06f5f653d107efbc67fd2aa3877ac344" },
   "nvim-web-devicons": { "branch": "master", "commit": "3af745113ea537f58c4b1573b64a429fefad9e07" },
   "oil-vcs-status": { "branch": "main", "commit": "7f0cd678b851ecafa378ff1f3f2fdbb898035768" },
   "oil.nvim": { "branch": "master", "commit": "a632c898fbe0e363ef89b9577f1a7714ab67d682" },
   "plenary.nvim": { "branch": "master", "commit": "ec289423a1693aeae6cd0d503bac2856af74edaa" },
+  "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" }
 }

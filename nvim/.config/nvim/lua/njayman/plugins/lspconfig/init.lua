@@ -101,6 +101,12 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+		local configs = require("lspconfig.configs")
+
+		local util = require("lspconfig.util")
+		local async = require("lspconfig.async")
+		local mod_cache = "/home/najishmahmud/go/pkg/mod"
+
 		local servers = {
 			tsserver = {},
 			lua_ls = {
@@ -117,6 +123,29 @@ return {
 			},
 			pyright = {},
 			marksman = {},
+			gopls = {
+				filetypes = { "go", "gomod", "gotpml", "gowork" },
+				cmd = { "gopls" },
+				root_dir = function(fname)
+					if not mod_cache then
+						local result = async.run_command("go env GOMODCACHE")
+
+						if result and result[1] then
+							mod_cache = vim.trim(result[1])
+						end
+					end
+
+					if fname:sub(1, #mod_cache) == mod_cache then
+						local clients = vim.lsp.get_active_clients({ name = "gopls" })
+
+						if #clients > 0 then
+							return clients[#clients].config.root_dir
+						end
+					end
+
+					return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
+				end,
+			},
 		}
 
 		require("mason").setup()
