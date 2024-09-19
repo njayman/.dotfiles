@@ -1,8 +1,17 @@
 return {
-	"sainnhe/gruvbox-material",
+	"catppuccin/nvim",
+	name = "catppuccin",
 	lazy = false,
 	priority = 1000,
-	config = function()
-		vim.cmd.colorscheme("gruvbox-material")
-	end,
+	opts = {
+		color_overrides = {
+			mocha = {
+				base = "#000000",
+				mantle = "#010101",
+				crust = "#020202",
+			},
+			flavour = "mocha",
+			transparent_background = true,
+		},
+	},
 }
