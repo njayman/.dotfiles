@@ -40,13 +40,36 @@ return {
 	config = function(_, opts)
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
-		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup(opts)
 
 		require("ufo").setup({
-			provider_selector = function(_bufnr, _filetype, _buftype)
+			provider_selector = function()
 				return { "treesitter", "indent" }
 			end,
+			open_fold_hl_timeout = 400,
+			close_fold_kinds_for_ft = { default = {} },
+			enable_get_fold_virt_text = false,
+			preview = {
+				win_config = {
+					border = "rounded",
+					winblend = 12,
+					winhighlight = "Normal:Normal",
+					maxheight = 20,
+				},
+				mappings = {
+					scrollB = "",
+					scrollF = "",
+					scrollU = "",
+					scrollD = "",
+					scrollE = "<C-E>",
+					scrollY = "<C-Y>",
+					jumpTop = "",
+					jumpBot = "",
+					close = "q",
+					switch = "<Tab>",
+					trace = "<CR>",
+				},
+			},
 		})
 
 		-- There are additional nvim-treesitter modules that you can use to interact
