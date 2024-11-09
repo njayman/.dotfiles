@@ -123,6 +123,16 @@ return {
 			},
 			pyright = {},
 			marksman = {},
+			hyprls = {
+				pattern = { "*.hl", "hypr*.conf" },
+				callback = function()
+					vim.lsp.start({
+						name = "hyprlang",
+						cmd = { "hyprls" },
+						root_dir = vim.fn.getcwd(),
+					})
+				end,
+			},
 			gopls = {
 				filetypes = { "go", "gomod", "gotpml", "gowork" },
 				cmd = { "gopls" },

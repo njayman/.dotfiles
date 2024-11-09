@@ -16,6 +16,7 @@ return {
 			"diff",
 			"go",
 			"html",
+			"hyprlang",
 			"java",
 			"javascript",
 			"json",
@@ -39,6 +40,10 @@ return {
 	},
 	config = function(_, opts)
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+
+		vim.filetype.add({
+			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+		})
 
 		require("nvim-treesitter.configs").setup(opts)
 
