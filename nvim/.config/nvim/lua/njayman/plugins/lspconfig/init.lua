@@ -71,11 +71,13 @@ return {
 						callback = vim.lsp.buf.document_highlight,
 					})
 
-					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-						buffer = event.buf,
-						group = highlight_augroup,
-						callback = vim.lsp.buf.clear_references,
-					})
+					if not vim.g.vscode then
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							buffer = event.buf,
+							group = highlight_augroup,
+							callback = vim.lsp.buf.clear_references,
+						})
+					end
 
 					vim.api.nvim_create_autocmd("LspDetach", {
 						group = vim.api.nvim_create_augroup("njayman-lsp-detach", { clear = true }),
@@ -101,14 +103,17 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		local configs = require("lspconfig.configs")
+		local nvim_lsp = require("lspconfig")
 
 		local util = require("lspconfig.util")
 		local async = require("lspconfig.async")
 		local mod_cache = "/home/najishmahmud/go/pkg/mod"
 
 		local servers = {
-			tsserver = {},
+			tsserver = {
+				root_dir = nvim_lsp.util.root_pattern("package.json"),
+				single_file_support = false,
+			},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -155,6 +160,9 @@ return {
 
 					return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
 				end,
+			},
+			denols = {
+				root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 			},
 		}
 
