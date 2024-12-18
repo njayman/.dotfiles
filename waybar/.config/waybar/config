@@ -2,21 +2,11 @@
     "layer":"top",
     "position": "top",
     "spacing": 4,
-    "module-left": ["hyprland/workspaces","hyprland/submap","backlight","network"], 
-    "module-center": ["hyprland/window"],
-    "modules-right": ["hyprland/submap", "hyprland/language", "battery", "tray", "clock"],
+    "modules-left": ["hyprland/workspaces"], 
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["hyprland/submap", "hyprland/language", "backlight", "network", "battery", "tray", "clock"],
     "hyprland/workspaces": {
         "on-click": "activate",
         "format": "{name}",
-        "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
     }
 }]
