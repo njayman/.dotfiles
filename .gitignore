@@ -6,3 +6,4 @@ tmux/.config/tmux/plugins/*
 !tmux/.config//tmux/plugins/.gitkeep
 office-ergo/nvim/plugin/packer_compiled.lua
 ranger/.config/ranger/plugins/ranger_udisk_menu/.git
+.zsh_history
