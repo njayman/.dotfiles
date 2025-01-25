@@ -1,0 +1,82 @@
+[
+    {
+        "layer": "top",
+        "position": "top",
+        "spacing": 4,
+        "modules-left": [
+            "hyprland/workspaces",
+            "backlight",
+            "wireplumber"
+        ],
+        "modules-center": [
+            "hyprland/window"
+        ],
+        "modules-right": [
+            "network",
+            "battery",
+            "clock",
+            "tray"
+        ],
+        "hyprland/workspaces": {
+            "on-click": "activate",
+            "format": "{name}"
+        },
+        "hyptland/window": {
+            "icon": true,
+            "format": "{icon} {name}"
+        },
+        "backlight": {
+            "on-scroll-up": "brightnessctl s 5%+",
+            "on-scroll-down": "brightnessctl s 5%-",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "format": "{icon} {percent}%"
+        },
+        "battery": {
+            "format": "<span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "format-time": "{H}h{M}m",
+            "format-charging": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+            "format-full": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
+            "interval": 30,
+            "states": {
+                "warning": 25,
+                "critical": 10
+            },
+            "tooltip": false,
+            "on-click": "2"
+        },
+        "network": {
+            "format-wifi": "  {essid}",
+            "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+            "format-linked": "{ifname} (No IP) ",
+            "format-disconnected": "⚠ Disconnected",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "wireplumber": {
+            "format": "{icon} {volume}%",
+            "format-muted": "",
+            "on-click": "helvum",
+            "format-icons": [
+                "",
+                "",
+                ""
+            ]
+        }
+    }
+]

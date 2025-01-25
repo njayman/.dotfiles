@@ -128,6 +128,7 @@ return {
 					},
 				},
 			},
+			jsonls = {},
 			pyright = {},
 			marksman = {},
 			hyprls = {
