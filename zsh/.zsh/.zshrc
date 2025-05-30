@@ -35,3 +35,10 @@ source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fpath=($ZSH/plugins/zsh-completions/src $fpath)
 
 source ~/.zsh_conf
+
+# bun completions
+[ -s "/home/njayman/.bun/_bun" ] && source "/home/njayman/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
