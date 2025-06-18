@@ -167,6 +167,7 @@ return {
 			denols = {
 				root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 			},
+			rust_analyzer = {},
 		}
 
 		require("mason").setup()
@@ -179,6 +180,7 @@ return {
 			"eslint",
 			"markdownlint",
 			"prettier",
+			"rust_analyzer",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed, automatic_installation = true })
