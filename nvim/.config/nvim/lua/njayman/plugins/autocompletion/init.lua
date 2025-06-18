@@ -18,6 +18,11 @@ return {
 					end,
 				},
 			},
+			config = function()
+				vim.keymap.set({ "i", "s", "n" }, "<C-k>", function()
+					require("luasnip").unlink_current()
+				end, { desc = "Unlink LuaSnip snippet nodes" })
+			end,
 		},
 		"saadparwaiz1/cmp_luasnip",
 
