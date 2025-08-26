@@ -36,6 +36,8 @@ return {
 			html = { "prettier" },
 			css = { "prettier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
 		},
 	},
 }

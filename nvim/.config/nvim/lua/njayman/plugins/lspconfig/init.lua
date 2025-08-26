@@ -168,6 +168,11 @@ return {
 				root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 			},
 			rust_analyzer = {},
+			clangd = {
+				cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
+				filetypes = { "c", "cpp", "objc", "objcpp" },
+				root_dir = require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+			},
 		}
 
 		require("mason").setup()
@@ -181,6 +186,8 @@ return {
 			"markdownlint",
 			"prettier",
 			"rust_analyzer",
+			"clangd",
+			"clang-format",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed, automatic_installation = true })
