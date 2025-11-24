@@ -8,6 +8,26 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 #
 
+# Start ssh-agent if not already running
+SSH_ENV="$HOME/.ssh/agent_env"
+#
+function start_agent {
+    echo "Starting ssh-agent..."
+    eval "$(ssh-agent -s)" > /dev/null
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
+    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > "$SSH_ENV"
+    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> "$SSH_ENV"
+    chmod 600 "$SSH_ENV"
+}
+#
+if [ -f "$SSH_ENV" ]; then
+    . "$SSH_ENV" > /dev/null
+    ps -ef | grep $SSH_AGENT_PID | grep -q ssh-agent || start_agent
+else
+    start_agent
+fi
+# End ssh-agent
+
 # plugins & themes
 
 source $ZSH/themes/spaceship-prompt/spaceship.zsh-theme
@@ -42,3 +62,12 @@ source ~/.zsh_conf
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/njayman/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="$HOME/bin:$PATH"
