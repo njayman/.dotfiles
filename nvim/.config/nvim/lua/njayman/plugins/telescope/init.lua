@@ -9,7 +9,19 @@ return {
 		},
 	},
 	config = function()
-		-- local telescope = require("telescope").setup{}
+		local telescope = require("telescope").setup({
+			defaults = {
+				initial_mode = "normal",
+			},
+			mappings = {
+				i = {
+					["<Esc>"] = require("telescope.actions").close,
+				},
+				n = {
+					["<Esc>"] = require("telescope.actions").close,
+				},
+			},
+		})
 		local builtin = require("telescope.builtin")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })

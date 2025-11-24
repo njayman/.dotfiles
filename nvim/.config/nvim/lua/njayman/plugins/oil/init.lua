@@ -2,7 +2,7 @@ return {
 	"stevearc/oil.nvim",
 	opts = {},
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		{ "nvim-mini/mini.icons", opts = {} },
 		"SirZenith/oil-vcs-status",
 	},
 	config = function()
