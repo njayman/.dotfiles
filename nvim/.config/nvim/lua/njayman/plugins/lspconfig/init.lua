@@ -113,8 +113,9 @@ return {
 
 		local servers = {
 			ts_ls = {
-				root_dir = nvim_lsp.util.root_pattern("package.json"),
+				root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json"),
 				single_file_support = false,
+				settings = {},
 			},
 			lua_ls = {
 				settings = {
@@ -164,9 +165,11 @@ return {
 					return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
 				end,
 			},
-			denols = {
-				root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-			},
+			-- denols = {
+			-- 	root_dir = require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" }),
+			-- 	single_file_support = false,
+			-- 	settings = {},
+			-- },
 			rust_analyzer = {},
 			clangd = {
 				cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
