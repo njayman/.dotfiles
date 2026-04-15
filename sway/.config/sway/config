@@ -248,7 +248,7 @@ bindsym $mod+r mode "resize"
 #         inactive_workspace #32323200 #32323200 #5c5c5c
 #     }
 # }
-exec_always pkill waybar; waybar
+exec_always pkill waybar; sleep 1; waybar
 
 # Window decoration (Colloid style minimal)
 default_border pixel 2
