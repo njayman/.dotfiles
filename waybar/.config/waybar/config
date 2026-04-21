@@ -12,6 +12,7 @@
         "clock"
     ],
     "modules-right": [
+        "custom/keybinds",
         "custom/gamma",
         "backlight",
         "pulseaudio#microphone",
@@ -76,6 +77,11 @@
         "format-disconnected": "󰤭 offline",
         "tooltip-format-wifi": "{signalStrength}% | {frequency} GHz",
         "on-click": "nm-connection-editor"
+    },
+    "custom/keybinds": {
+        "format": "󰌌",
+        "on-click": "~/.config/waybar/scripts/keybinds-help.sh",
+        "tooltip": false
     },
     "custom/gamma": {
         "exec": "pgrep wlsunset > /dev/null && echo '󱩌 warm' || echo '󰌵 cool'",

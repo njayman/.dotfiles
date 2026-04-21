@@ -1,0 +1,89 @@
+{
+  "Basics": [
+    { "key": "$mod+Return",   "action": "exec $term",                          "desc": "Terminal" },
+    { "key": "$mod+Shift+q",  "action": "kill",                                "desc": "Kill window" },
+    { "key": "$mod+d",        "action": "exec $menu",                          "desc": "App launcher" },
+    { "key": "$mod+Shift+c",  "action": "exec ~/.config/sway/reload.sh",       "desc": "Reload config" },
+    { "key": "$mod+Shift+e",  "action": "exec ~/.config/sway/powermenu.sh",    "desc": "Power menu" }
+  ],
+  "Navigation": [
+    { "key": "$mod+h",          "action": "focus left",  "desc": "Focus left" },
+    { "key": "$mod+j",          "action": "focus down",  "desc": "Focus down" },
+    { "key": "$mod+k",          "action": "focus up",    "desc": "Focus up" },
+    { "key": "$mod+l",          "action": "focus right", "desc": "Focus right" },
+    { "key": "$mod+Left",       "action": "focus left",  "desc": "Focus left",  "hidden": true },
+    { "key": "$mod+Down",       "action": "focus down",  "desc": "Focus down",  "hidden": true },
+    { "key": "$mod+Up",         "action": "focus up",    "desc": "Focus up",    "hidden": true },
+    { "key": "$mod+Right",      "action": "focus right", "desc": "Focus right", "hidden": true }
+  ],
+  "Move Window": [
+    { "key": "$mod+Shift+h",     "action": "move left",  "desc": "Move left" },
+    { "key": "$mod+Shift+j",     "action": "move down",  "desc": "Move down" },
+    { "key": "$mod+Shift+k",     "action": "move up",    "desc": "Move up" },
+    { "key": "$mod+Shift+l",     "action": "move right", "desc": "Move right" },
+    { "key": "$mod+Shift+Left",  "action": "move left",  "desc": "Move left",  "hidden": true },
+    { "key": "$mod+Shift+Down",  "action": "move down",  "desc": "Move down",  "hidden": true },
+    { "key": "$mod+Shift+Up",    "action": "move up",    "desc": "Move up",    "hidden": true },
+    { "key": "$mod+Shift+Right", "action": "move right", "desc": "Move right", "hidden": true }
+  ],
+  "Workspaces": [
+    { "key": "$mod+1", "action": "workspace number 1",  "desc": "Workspace 1" },
+    { "key": "$mod+2", "action": "workspace number 2",  "desc": "Workspace 2" },
+    { "key": "$mod+3", "action": "workspace number 3",  "desc": "Workspace 3" },
+    { "key": "$mod+4", "action": "workspace number 4",  "desc": "Workspace 4" },
+    { "key": "$mod+5", "action": "workspace number 5",  "desc": "Workspace 5" },
+    { "key": "$mod+6", "action": "workspace number 6",  "desc": "Workspace 6" },
+    { "key": "$mod+7", "action": "workspace number 7",  "desc": "Workspace 7" },
+    { "key": "$mod+8", "action": "workspace number 8",  "desc": "Workspace 8" },
+    { "key": "$mod+9", "action": "workspace number 9",  "desc": "Workspace 9" },
+    { "key": "$mod+0", "action": "workspace number 10", "desc": "Workspace 10" },
+    { "key": "$mod+Shift+1", "action": "move container to workspace number 1",  "desc": "Move to WS 1" },
+    { "key": "$mod+Shift+2", "action": "move container to workspace number 2",  "desc": "Move to WS 2" },
+    { "key": "$mod+Shift+3", "action": "move container to workspace number 3",  "desc": "Move to WS 3" },
+    { "key": "$mod+Shift+4", "action": "move container to workspace number 4",  "desc": "Move to WS 4" },
+    { "key": "$mod+Shift+5", "action": "move container to workspace number 5",  "desc": "Move to WS 5" },
+    { "key": "$mod+Shift+6", "action": "move container to workspace number 6",  "desc": "Move to WS 6" },
+    { "key": "$mod+Shift+7", "action": "move container to workspace number 7",  "desc": "Move to WS 7" },
+    { "key": "$mod+Shift+8", "action": "move container to workspace number 8",  "desc": "Move to WS 8" },
+    { "key": "$mod+Shift+9", "action": "move container to workspace number 9",  "desc": "Move to WS 9" },
+    { "key": "$mod+Shift+0", "action": "move container to workspace number 10", "desc": "Move to WS 10" }
+  ],
+  "Layout": [
+    { "key": "$mod+b",           "action": "splith",              "desc": "Split horizontal" },
+    { "key": "$mod+v",           "action": "splitv",              "desc": "Split vertical" },
+    { "key": "$mod+s",           "action": "layout stacking",     "desc": "Stacking layout" },
+    { "key": "$mod+w",           "action": "layout tabbed",       "desc": "Tabbed layout" },
+    { "key": "$mod+e",           "action": "layout toggle split", "desc": "Toggle split" },
+    { "key": "$mod+f",           "action": "fullscreen",          "desc": "Fullscreen" },
+    { "key": "$mod+Shift+space", "action": "floating toggle",     "desc": "Float toggle" },
+    { "key": "$mod+space",       "action": "focus mode_toggle",   "desc": "Focus float/tile" },
+    { "key": "$mod+a",           "action": "focus parent",        "desc": "Focus parent" },
+    { "key": "$mod+r",           "action": "mode \"resize\"",     "desc": "Resize mode" }
+  ],
+  "Scratchpad": [
+    { "key": "$mod+Shift+minus", "action": "move scratchpad",  "desc": "Send to scratchpad" },
+    { "key": "$mod+minus",       "action": "scratchpad show",  "desc": "Show scratchpad" }
+  ],
+  "Audio": [
+    { "key": "XF86AudioMute",        "action": "exec pactl set-sink-mute \\@DEFAULT_SINK@ toggle",       "desc": "Toggle mute",   "locked": true },
+    { "key": "XF86AudioLowerVolume", "action": "exec pactl set-sink-volume \\@DEFAULT_SINK@ -5%",        "desc": "Volume down",   "locked": true },
+    { "key": "XF86AudioRaiseVolume", "action": "exec pactl set-sink-volume \\@DEFAULT_SINK@ +5%",        "desc": "Volume up",     "locked": true },
+    { "key": "XF86AudioMicMute",     "action": "exec pactl set-source-mute \\@DEFAULT_SOURCE@ toggle",   "desc": "Toggle mic mute","locked": true }
+  ],
+  "Media": [
+    { "key": "XF86AudioPlay",  "action": "exec playerctl play-pause", "desc": "Play/pause", "locked": true },
+    { "key": "XF86AudioPause", "action": "exec playerctl play-pause", "desc": "Pause",      "locked": true, "hidden": true },
+    { "key": "XF86AudioPrev",  "action": "exec playerctl previous",   "desc": "Previous",   "locked": true },
+    { "key": "XF86AudioNext",  "action": "exec playerctl next",       "desc": "Next",       "locked": true },
+    { "key": "XF86AudioStop",  "action": "exec playerctl stop",       "desc": "Stop",       "locked": true }
+  ],
+  "Brightness": [
+    { "key": "XF86MonBrightnessDown", "action": "exec brightnessctl set 5%-",  "desc": "Brightness down", "locked": true },
+    { "key": "XF86MonBrightnessUp",   "action": "exec brightnessctl set 5%+",  "desc": "Brightness up",   "locked": true }
+  ],
+  "Utilities": [
+    { "key": "Print",        "action": "exec grim -g \"$(slurp)\" - | swappy -f -",    "desc": "Screenshot" },
+    { "key": "$mod+c",       "action": "exec copyq show",                              "desc": "Clipboard" },
+    { "key": "$mod+Tab",     "action": "exec ~/.config/sway/workspace-overview.sh",    "desc": "Window picker" }
+  ]
+}
