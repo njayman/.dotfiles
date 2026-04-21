@@ -35,17 +35,54 @@ window#waybar {
 #clock,
 #battery,
 #network,
-#pulseaudio {
+#pulseaudio,
+#backlight,
+#custom-weather,
+#custom-gamma {
   padding: 4px 10px;
   margin: 4px;
   border-radius: 8px;
   background: rgba(44, 44, 44, 0.6);
 }
 
-/* Hover effect */
+/* Microphone uses same base as pulseaudio */
+#pulseaudio.microphone {
+  padding: 4px 10px;
+  margin: 4px;
+  border-radius: 8px;
+  background: rgba(44, 44, 44, 0.6);
+}
+
+/* Hover effects */
 #clock:hover,
 #battery:hover,
 #network:hover,
-#pulseaudio:hover {
+#pulseaudio:hover,
+#backlight:hover,
+#custom-weather:hover,
+#custom-gamma:hover,
+#pulseaudio.microphone:hover {
   background: rgba(91, 155, 248, 0.15);
+}
+
+/* Muted mic — red tint */
+#pulseaudio.microphone.source-muted {
+  background: rgba(253, 95, 81, 0.2);
+  color: #fd5f51;
+}
+
+/* Muted speaker */
+#pulseaudio.muted {
+  background: rgba(253, 95, 81, 0.15);
+  color: #fd5f51;
+}
+
+/* Gamma warm — amber tint */
+#custom-gamma {
+  color: #bfbfbf;
+}
+
+/* Weather */
+#custom-weather {
+  color: #bfbfbf;
 }
