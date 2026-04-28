@@ -1,11 +1,26 @@
 exec_always dbus-update-activation-environment --systemd \
   WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets,ssh
+exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
+exec --no-startup-id bluetoothctl power off
+exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 exec --no-startup-id copyq
 exec wlsunset -t 3500 -T 6500
 set $SSH_AUTH_SOCK $XDG_RUNTIME_DIR/keyring/ssh
 seat * xcursor_theme oreo_black_cursors 24
+
+### Window rules
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [class="(?i)pinentry"] floating enable
+for_window [app_id="brave-browser" window_role="pop-up"] floating enable
+for_window [app_id="brave-browser" window_role="task_dialog"] floating enable
+for_window [app_id="brave-browser" window_type="menu"] floating enable
+
+
 
 ### Variables
 set $mod Mod4

@@ -75,7 +75,9 @@
         "format-wifi": "󰤨 {essid}",
         "format-ethernet": "󰈀 wired",
         "format-disconnected": "󰤭 offline",
-        "tooltip-format-wifi": "{signalStrength}% | {frequency} GHz",
+        "tooltip-format-wifi": "{ipaddr} | {signalStrength}% | {frequency} GHz",
+        "tooltip-format-ethernet": "{ipaddr}",
+        "tooltip-format-disconnected": "disconnected",
         "on-click": "nm-connection-editor"
     },
     "custom/keybinds": {
