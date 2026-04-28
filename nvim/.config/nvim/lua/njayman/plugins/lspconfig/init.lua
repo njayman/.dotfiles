@@ -105,11 +105,41 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		local nvim_lsp = require("lspconfig")
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = "✗",
+					[vim.diagnostic.severity.WARN] = "",
+					[vim.diagnostic.severity.INFO] = "",
+					[vim.diagnostic.severity.HINT] = "󰌶",
+				},
+			},
+			virtual_text = { prefix = "●" },
+			float = { border = "rounded", source = true },
+			severity_sort = true,
+			underline = true,
+			update_in_insert = false,
+		})
 
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+			vim.lsp.handlers.hover,
+			{ border = "rounded" }
+		)
+		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+			vim.lsp.handlers.signature_help,
+			{ border = "rounded" }
+		)
+
+		local nvim_lsp = require("lspconfig")
 		local util = require("lspconfig.util")
-		local async = require("lspconfig.async")
-		local mod_cache = "/home/najishmahmud/go/pkg/mod"
+
+		local mod_cache = nil
+		if vim.fn.executable("go") == 1 then
+			mod_cache = vim.trim(vim.fn.system("go env GOMODCACHE"))
+			if mod_cache == "" then
+				mod_cache = nil
+			end
+		end
 
 		local servers = {
 			ts_ls = {
@@ -132,44 +162,24 @@ return {
 			jsonls = {},
 			pyright = {},
 			marksman = {},
-			hyprls = {
-				pattern = { "*.hl", "hypr*.conf" },
-				callback = function()
-					vim.lsp.start({
-						name = "hyprlang",
-						cmd = { "hyprls" },
-						root_dir = vim.fn.getcwd(),
-					})
-				end,
-			},
+			bashls = {},
 			gopls = {
 				filetypes = { "go", "gomod", "gotpml", "gowork" },
 				cmd = { "gopls" },
 				root_dir = function(fname)
-					if not mod_cache then
-						local result = async.run_command("go env GOMODCACHE")
-
-						if result and result[1] then
-							mod_cache = vim.trim(result[1])
-						end
-					end
-
-					if fname:sub(1, #mod_cache) == mod_cache then
+					if mod_cache and fname:sub(1, #mod_cache) == mod_cache then
 						local clients = vim.lsp.get_clients({ name = "gopls" })
-
 						if #clients > 0 then
 							return clients[#clients].config.root_dir
 						end
 					end
-
 					return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
 				end,
 			},
-			-- denols = {
-			-- 	root_dir = require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" }),
-			-- 	single_file_support = false,
-			-- 	settings = {},
-			-- },
+			denols = {
+				root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+				single_file_support = false,
+			},
 			rust_analyzer = {},
 			clangd = {
 				cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
@@ -178,10 +188,21 @@ return {
 			},
 		}
 
+		if vim.fn.executable("hyprls") == 1 then
+			servers.hyprls = {
+				pattern = { "*.hl", "hypr*.conf" },
+				callback = function()
+					vim.lsp.start({
+						name = "hyprlang",
+						cmd = { "hyprls" },
+						root_dir = vim.fn.getcwd(),
+					})
+				end,
+			}
+		end
+
 		require("mason").setup()
 
-		-- You can add other tools here that you want Mason to install
-		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua",
@@ -191,6 +212,7 @@ return {
 			"rust_analyzer",
 			"clangd",
 			"clang-format",
+			"bash-language-server",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed, automatic_installation = true })

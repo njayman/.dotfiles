@@ -41,5 +41,6 @@ return {
 				prompt_title = "Live Grep in Open Files",
 			})
 		end, { desc = "[S]earch [/] in Open Files" })
+		vim.keymap.set("n", "<leader>?", builtin.keymaps, { desc = "[?] Search keymaps" })
 	end,
 }

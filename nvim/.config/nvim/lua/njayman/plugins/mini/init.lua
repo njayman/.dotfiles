@@ -44,13 +44,21 @@ return {
 				{ mode = "x", keys = "z" },
 			},
 			clues = {
-				-- Enhance this by adding descriptions for <Leader> mapping groups
 				miniclue.gen_clues.builtin_completion(),
 				miniclue.gen_clues.g(),
 				miniclue.gen_clues.marks(),
 				miniclue.gen_clues.registers(),
 				miniclue.gen_clues.windows(),
 				miniclue.gen_clues.z(),
+
+				-- Leader group labels
+				{ mode = "n", keys = "<Leader>f", desc = "+find" },
+				{ mode = "n", keys = "<Leader>t", desc = "+terminal" },
+				{ mode = "n", keys = "<Leader>d", desc = "+diagnostics" },
+				{ mode = "n", keys = "<Leader>w", desc = "+workspace" },
+				{ mode = "n", keys = "<Leader>s", desc = "+session" },
+				{ mode = "n", keys = "<Leader>c", desc = "+code" },
+				{ mode = "n", keys = "<Leader>r", desc = "+rename" },
 			},
 		})
 	end,
