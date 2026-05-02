@@ -7,11 +7,22 @@
         "sway/workspaces",
         "sway/mode"
     ],
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "format": "",
+        "persistent-workspaces": {
+            "1": [], "2": [], "3": [], "4": [], "5": [],
+            "6": [], "7": [], "8": [], "9": []
+        }
+    },
     "modules-center": [
         "custom/weather",
         "clock"
     ],
     "modules-right": [
+        "custom/gamemode",
+        "custom/dnd",
         "custom/keybinds",
         "custom/gamma",
         "backlight",
@@ -50,7 +61,10 @@
     "pulseaudio": {
         "format": "󰕾 {volume}%",
         "format-muted": "󰖁 muted",
+        "scroll-step": 2,
+        "smooth-scrolling-threshold": 5,
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol",
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
         "tooltip-format": "{desc} | {volume}%"
@@ -90,5 +104,17 @@
         "on-click": "pgrep wlsunset > /dev/null && pkill wlsunset || wlsunset -t 3500 -T 6500",
         "interval": 5,
         "tooltip": false
+    },
+    "custom/dnd": {
+        "exec": "~/.config/waybar/scripts/dnd.sh",
+        "on-click": "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb",
+        "interval": 2,
+        "return-type": "json"
+    },
+    "custom/gamemode": {
+        "exec": "~/.config/waybar/scripts/gamemode.sh",
+        "on-click": "systemctl --user is-active gamemoded | grep -q active && systemctl --user stop gamemoded || systemctl --user start gamemoded",
+        "interval": 5,
+        "return-type": "json"
     }
 }
