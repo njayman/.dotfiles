@@ -9,23 +9,23 @@ setopt HIST_FIND_NO_DUPS
 #
 
 # Start ssh-agent if not already running
-SSH_ENV="$HOME/.ssh/agent_env"
+# SSH_ENV="$HOME/.ssh/agent_env"
 #
-function start_agent {
-    echo "Starting ssh-agent..."
-    eval "$(ssh-agent -s)" > /dev/null
-    ssh-add ~/.ssh/id_ed25519 2>/dev/null
-    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > "$SSH_ENV"
-    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> "$SSH_ENV"
-    chmod 600 "$SSH_ENV"
-}
+# function start_agent {
+#     echo "Starting ssh-agent..."
+#     eval "$(ssh-agent -s)" > /dev/null
+#     ssh-add ~/.ssh/id_ed25519 2>/dev/null
+#     echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > "$SSH_ENV"
+#     echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> "$SSH_ENV"
+#     chmod 600 "$SSH_ENV"
+# }
 #
-if [ -f "$SSH_ENV" ]; then
-    . "$SSH_ENV" > /dev/null
-    ps -ef | grep $SSH_AGENT_PID | grep -q ssh-agent || start_agent
-else
-    start_agent
-fi
+# if [ -f "$SSH_ENV" ]; then
+#     . "$SSH_ENV" > /dev/null
+#     ps -ef | grep $SSH_AGENT_PID | grep -q ssh-agent || start_agent
+# else
+#     start_agent
+# fi
 # End ssh-agent
 
 # plugins & themes
@@ -70,4 +70,18 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# encore
+export ENCORE_INSTALL="/home/njayman/.encore"
+export PATH="$ENCORE_INSTALL/bin:$PATH"
+# end
+
 export PATH="$HOME/bin:$PATH"
+
+
+eval "$(zoxide init zsh)"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+
+alias wake-zero='wake-zero'
+alias zero='ssh -p 2244 njayman@192.168.1.116'
