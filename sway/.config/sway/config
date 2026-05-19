@@ -62,9 +62,7 @@ mode "resize" {
 }
 
 ### Status Bar
-bar {
-    swaybar_command waybar
-}
+exec_always ~/.config/eww/scripts/launch.sh
 
 ### Window decoration
 default_border pixel 2

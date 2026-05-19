@@ -1,0 +1,197 @@
+;;;; Listeners ;;;;
+
+(deflisten workspaces
+  :initial "[]"
+  `~/.config/eww/scripts/workspaces.sh`)
+
+;;;; Polls ;;;;
+
+(defpoll time
+  :interval "1s"
+  `date '+%a %d %b  󰥔 %H:%M'`)
+
+(defpoll weather-text
+  :interval "1800s"
+  :initial ""
+  `ping -c1 -W2 wttr.in >/dev/null 2>&1 && ~/.config/waybar/scripts/weather.sh 2>/dev/null || echo ""`)
+
+(defpoll vol-text
+  :interval "1s"
+  `~/.config/eww/scripts/volume.sh`)
+
+(defpoll vol-muted
+  :interval "1s"
+  `pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo 1 || echo 0`)
+
+(defpoll mic-text
+  :interval "1s"
+  `~/.config/eww/scripts/mic.sh`)
+
+(defpoll mic-muted
+  :interval "1s"
+  `pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo 1 || echo 0`)
+
+(defpoll brightness-pct
+  :interval "2s"
+  `brightnessctl -m 2>/dev/null | awk -F, '{gsub(/%/,"",$5); printf "%d",$5}'`)
+
+(defpoll net-text
+  :interval "10s"
+  `~/.config/eww/scripts/network.sh`)
+
+(defpoll bat-text
+  :interval "30s"
+  `~/.config/eww/scripts/battery.sh`)
+
+(defpoll gamma-on
+  :interval "5s"
+  `pgrep -x gammastep >/dev/null 2>&1 && echo 1 || echo 0`)
+
+(defpoll dnd-on
+  :interval "2s"
+  `makoctl mode 2>/dev/null | grep -q do-not-disturb && echo 1 || echo 0`)
+
+(defpoll gm-on
+  :interval "5s"
+  `systemctl --user is-active gamemoded 2>/dev/null | grep -q active && echo 1 || echo 0`)
+
+;;;; Widgets ;;;;
+
+(defwidget workspaces-w []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly false
+       :spacing 2
+    (for ws in {workspaces}
+      (button
+        :class { "ws-btn ${ws.state}" }
+        :onclick "swaymsg workspace ${ws.num}"
+        (label :markup {ws.state == "focused"
+            ? "<span color='#a6d189'>●</span>"
+            : ws.state == "urgent"
+                ? "<span color='#e64553'>●</span>"
+                : ws.state == "occupied"
+                    ? "<span color='#7287fd'>●</span>"
+                    : "<span color='#d3d3d3'>∙</span>"})
+        ))))
+(defwidget clock-w []
+  (box :class "module"
+    (label :text time)))
+
+(defwidget weather-w []
+  (box :class "module"
+       :visible {weather-text != ""}
+    (label :text weather-text)))
+
+(defwidget volume-w []
+  (eventbox :onscroll "[ '{}' = 'up' ] && pactl set-sink-volume @DEFAULT_SINK@ +2% || pactl set-sink-volume @DEFAULT_SINK@ -2%"
+    (button
+      :class "module ${vol-muted == 1 ? "muted" : ""}"
+      :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+      :onrightclick "pavucontrol"
+      (label :text vol-text))))
+
+(defwidget mic-w []
+  (eventbox :onscroll "[ '{}' = 'up' ] && pactl set-source-volume @DEFAULT_SOURCE@ +2% || pactl set-source-volume @DEFAULT_SOURCE@ -2%"
+    (button
+      :class "module mic ${mic-muted == 1 ? "muted" : ""}"
+      :onclick "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+      (label :text mic-text))))
+
+(defwidget brightness-w []
+  (box :class "module"
+       :visible {brightness-pct != ""}
+    (label :text "󰃟 ${brightness-pct}%")))
+
+(defwidget network-w []
+  (box :class "module"
+    (label :text net-text)))
+
+(defwidget battery-w []
+  (box :class "module"
+       :visible {bat-text != ""}
+    (label :text bat-text)))
+
+(defwidget gamma-w []
+  (button
+    :class "module ${gamma-on == 1 ? "warm" : ""}"
+    :onclick "pgrep -x gammastep >/dev/null 2>&1 && pkill gammastep || gammastep -O 3500"
+    (label :text {gamma-on == 1 ? "󱩌 warm" : "󰌵 cool"})))
+
+(defwidget dnd-w []
+  (button
+    :class "module ${dnd-on == 1 ? "dnd-active" : ""}"
+    :onclick "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb"
+    (label :text {dnd-on == 1 ? "󰂛" : "󰂚"})))
+
+(defwidget gamemode-w []
+  (button
+    :class "module ${gm-on == 1 ? "gm-active" : ""}"
+    :onclick "systemctl --user is-active gamemoded | grep -q active && systemctl --user stop gamemoded || systemctl --user start gamemoded"
+    (label :text {gm-on == 1 ? "󰖺" : "󰖻"})))
+
+(defwidget keybinds-w []
+  (button
+    :class "module"
+    :onclick "~/.config/waybar/scripts/keybinds-help.sh"
+    (label :text {"󰌌"})))
+
+(defwidget systray-w []
+  (systray
+    :spacing 5
+    :orientation 'h'
+    :icon-size 20
+    :space-evenly false))
+
+(defwidget bar-left []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "start"
+       :spacing 4
+    (workspaces-w)))
+
+(defwidget bar-center []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "center"
+       :spacing 4
+    (weather-w)
+    (clock-w)))
+
+(defwidget bar-right []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "end"
+       :spacing 4
+    (keybinds-w)
+    (gamemode-w)
+    (dnd-w)
+    (gamma-w)
+    (brightness-w)
+    (mic-w)
+    (volume-w)
+    (network-w)
+    (battery-w)
+    (systray-w)))
+
+(defwidget main-bar []
+  (centerbox :class "bar"
+             :orientation "h"
+    (bar-left)
+    (bar-center)
+    (bar-right)))
+
+;;;; Window ;;;;
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "30px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (main-bar))

@@ -24,9 +24,9 @@
             "10": []
         },
         "format-icons": {
-            "default": "<span color='#3c84f7'>∙</span>",
-            "focused": "<span color='#66bb6a'>●</span>",
-            "urgent": "<span color='#e53935'>●</span>"
+            "default": "<span color='#7287fd'>∙</span>",
+            "focused": "<span color='#a6d189'>●</span>",
+            "urgent": "<span color='#e64553'>●</span>"
         }
     },
     "modules-center": [
@@ -113,7 +113,7 @@
         "on-click": "nm-connection-editor"
     },
     "tray": {
-        "spacing": 10,
+        "spacing": 10
     },
     "custom/keybinds": {
         "format": "󰌌",

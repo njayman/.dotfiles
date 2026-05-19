@@ -1,0 +1,135 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+  font-size: 10pt;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+window {
+  background-color: transparent;
+}
+
+.bar {
+  background-color: transparent;
+}
+
+/* ── Scroll wrapper ── */
+.scroll-wrap {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Workspaces ── */
+.workspaces {
+  margin: 0 4px;
+}
+
+.ws-btn,
+.ws-btn:hover,
+.ws-btn:focus,
+.ws-btn:active {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  border-image: none;
+  box-shadow: none;
+  padding: 0 4px;
+  font-size: 10pt;
+  border-radius: 0;
+  transition: 120ms ease;
+}
+
+/* Empty — lavender, dimmed */
+.ws-btn.empty {
+  color: #d3d3d3;
+  opacity: 0.35;
+}
+
+/* Occupied — lavender, full */
+.ws-btn.occupied {
+  color: #7287fd;
+  opacity: 1;
+}
+
+/* Focused — green */
+.ws-btn.focused {
+  color: #a6d189;
+  opacity: 1;
+}
+
+/* Urgent — red */
+.ws-btn.urgent {
+  color: #e64553;
+  opacity: 1;
+}
+
+/* ── Base module (box) ── */
+box.module {
+  background-color: #1e1e2e;
+  border-radius: 8px;
+  padding: 4px 12px;
+  margin: 4px 2px;
+}
+
+box.module label {
+  color: #cdd6f4;
+}
+
+/* ── Button modules ── */
+button.module,
+button.module:hover,
+button.module:focus,
+button.module:active,
+button.module:checked {
+  background-color: #1e1e2e;
+  background-image: none;
+  border-image: none;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 4px 12px;
+  margin: 4px 2px;
+  color: #cdd6f4;
+}
+
+button.module:hover {
+  background-color: #313244;
+}
+
+button.module label {
+  color: inherit;
+}
+
+/* Muted — red */
+button.module.muted,
+button.module.muted:hover {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+button.module.muted label {
+  color: #1e1e2e;
+}
+
+/* Gamma warm */
+button.module.warm label {
+  color: #f9e2af;
+}
+
+/* DND active */
+button.module.dnd-active label {
+  color: #f38ba8;
+}
+
+/* Gamemode active */
+button.module.gm-active,
+button.module.gm-active:hover {
+  background-color: rgba(166, 227, 161, 0.15);
+}
+
+button.module.gm-active label {
+  color: #a6e3a1;
+}

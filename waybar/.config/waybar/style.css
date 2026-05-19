@@ -23,17 +23,17 @@ window#waybar {
 }
 
 #workspaces button.default {
-  color: #e53935;
+  color: #7287fd;
 }
 
 #workspaces button.focused {
   border-radius: 0px;
-  border-bottom: 1px solid #66bb6a;
+  border-bottom: 1px solid #a6d189;
 }
 
 #workspaces button.urgent {
   border-radius: 0px;
-  border-bottom: 1px solid #e53935;
+  border-bottom: 1px solid #e64553;
 }
 
 #workspaces button.empty {
@@ -41,7 +41,7 @@ window#waybar {
 }
 
 #workspaces button:not(.empty) {
-  color: #e53935;
+  color: #babbf1;
 }
 
 /* Modules */
