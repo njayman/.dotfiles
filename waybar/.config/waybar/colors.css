@@ -1,0 +1,72 @@
+/* Default Theme Color Palette */
+
+/* Red */
+@define-color red-light #F44336;
+@define-color red-dark #E53935;
+
+/* Pink */
+@define-color pink-light #F06292;
+@define-color pink-dark #EC407A;
+
+/* Purple */
+@define-color purple-light #BA68C8;
+@define-color purple-dark #AB47BC;
+
+/* Blue */
+@define-color blue-light #5b9bf8;
+@define-color blue-dark #3c84f7;
+
+/* Teal */
+@define-color teal-light #4DB6AC;
+@define-color teal-dark #009688;
+
+/* Green */
+@define-color green-light #66BB6A;
+@define-color green-dark #4CAF50;
+
+/* Yellow */
+@define-color yellow-light #FFD600;
+@define-color yellow-dark #FBC02D;
+
+/* Orange */
+@define-color orange-light #FF8A65;
+@define-color orange-dark #FF7043;
+
+/* Grey */
+@define-color grey-050 #FAFAFA;
+@define-color grey-100 #F2F2F2;
+@define-color grey-150 #EEEEEE;
+@define-color grey-200 #DDDDDD;
+@define-color grey-250 #CCCCCC;
+@define-color grey-300 #BFBFBF;
+@define-color grey-350 #A0A0A0;
+@define-color grey-400 #9E9E9E;
+@define-color grey-450 #868686;
+@define-color grey-500 #727272;
+@define-color grey-550 #555555;
+@define-color grey-600 #464646;
+@define-color grey-650 #3C3C3C;
+@define-color grey-700 #2C2C2C;
+@define-color grey-750 #242424;
+@define-color grey-800 #212121;
+@define-color grey-850 #121212;
+@define-color grey-900 #0F0F0F;
+@define-color grey-950 #030303;
+
+/* White */
+@define-color white #FFFFFF;
+
+/* Black */
+@define-color black #000000;
+
+/* Button */
+@define-color button-close #fd5f51;
+@define-color button-max #38c76a;
+@define-color button-min #fdbe04;
+
+/* Link */
+@define-color links #5bd3f8;
+
+/* Theme */
+@define-color default-light @blue-light;
+@define-color default-dark @blue-dark;

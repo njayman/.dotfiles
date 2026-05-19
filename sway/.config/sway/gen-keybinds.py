@@ -12,7 +12,8 @@ for section, binds in data.items():
     lines.append(f"\n# {section}")
     for b in binds:
         locked = "--locked " if b.get("locked") else ""
-        lines.append(f"bindsym {locked}{b['key']} {b['action']}")
+        no_repeat = "--no-repeat " if b.get("no_repeat") else ""
+        lines.append(f"bindsym {locked}{no_repeat}{b['key']} {b['action']}")
 
 out.write_text("\n".join(lines) + "\n")
 print(f"wrote {out}")

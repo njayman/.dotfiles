@@ -5,8 +5,9 @@ exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
 exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
-exec --no-startup-id copyq
-exec wlsunset -t 3500 -T 6500
+exec flatpak run com.github.hluk.copyq
+exec --no-startup-id pasystray
+exec gammastep -O 3500
 set $SSH_AUTH_SOCK $XDG_RUNTIME_DIR/keyring/ssh
 seat * xcursor_theme oreo_black_cursors 24
 
