@@ -15,9 +15,6 @@ return {
 	opts = {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
-			-- Disable "format_on_save lsp_fallback" for languages that don't
-			-- have a well standardized coding style. You can add additional
-			-- languages here or re-enable it for the disabled ones.
 			local disable_filetypes = { c = true, cpp = true }
 			return {
 				lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -26,15 +23,43 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "isort", "black" },
-			--
-			-- You can use 'stop_after_first' to run the first available formatter from the list
-			javascript = { "prettier" },
-			javascriptreact = { "prettier" },
-			typescript = { "prettier" },
-			typescriptreact = { "prettier" },
-			json = { "prettier" },
+			javascript = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
+			javascriptreact = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
+			typescript = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
+			typescriptreact = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
+			json = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
+			css = function(bufnr)
+				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
+					return { "biome" }
+				end
+				return { "prettier" }
+			end,
 			html = { "prettier" },
-			css = { "prettier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
