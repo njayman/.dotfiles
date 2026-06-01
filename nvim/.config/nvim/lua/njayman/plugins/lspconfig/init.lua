@@ -1,8 +1,6 @@
 return {
-	"neovim/nvim-lspconfig",
+	"williamboman/mason.nvim",
 	dependencies = {
-		{ "williamboman/mason.nvim", config = true },
-		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		{ "j-hui/fidget.nvim", opts = {} },
 		"hrsh7th/cmp-nvim-lsp",
@@ -105,6 +103,8 @@ return {
 			"denols",
 			"rust_analyzer",
 			"clangd",
+			"glsl_analyzer",
+			"cmake",
 		})
 
 		if vim.fn.executable("hyprls") == 1 then
@@ -125,29 +125,26 @@ return {
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"ts_ls",
-				"lua_ls",
-				"jsonls",
+				"typescript-language-server",
+				"lua-language-server",
+				"json-lsp",
 				"pyright",
 				"marksman",
-				"bashls",
+				"bash-language-server",
 				"gopls",
 				"biome",
-				"denols",
-				"rust_analyzer",
+				"deno",
+				"rust-analyzer",
 				"clangd",
+				"glsl_analyzer",
+				"cmake-language-server",
 				"stylua",
-				"eslint",
+				"eslint_d",
 				"markdownlint",
 				"prettier",
 				"clang-format",
-				"bash-language-server",
 			},
 			automatic_installation = true,
-		})
-
-		require("mason-lspconfig").setup({
-			automatic_enable = false,
 		})
 	end,
 }

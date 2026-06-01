@@ -76,7 +76,7 @@ export ENCORE_INSTALL="/home/njayman/.encore"
 export PATH="$ENCORE_INSTALL/bin:$PATH"
 # end
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.cargo/bin:$PATH"
 
 
 eval "$(zoxide init zsh)"

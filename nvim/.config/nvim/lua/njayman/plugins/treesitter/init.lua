@@ -7,45 +7,35 @@ return {
 			dependencies = { "kevinhwang91/promise-async" },
 		},
 	},
-	opts = {
-		ensure_installed = {
-			"bash",
-			"c",
-			"css",
-			"dockerfile",
-			"diff",
-			"go",
-			"html",
-			"hyprlang",
-			"java",
-			"javascript",
-			"json",
-			"lua",
-			"luadoc",
-			"markdown",
-			"markdown_inline",
-			"python",
-			"rust",
-			"sql",
-			"typescript",
-			"vim",
-			"vimdoc",
-			"yaml",
-		},
-		auto_install = true,
-		highlight = {
-			enable = true,
-		},
-		indent = { enable = true, disable = {} },
-	},
-	config = function(_, opts)
-		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
+	config = function()
 		vim.filetype.add({
 			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+			extension = {
+				vert = "glsl",
+				frag = "glsl",
+				comp = "glsl",
+				geom = "glsl",
+				tesc = "glsl",
+				tese = "glsl",
+				glsl = "glsl",
+			},
 		})
 
-		require("nvim-treesitter.configs").setup(opts)
+		require("nvim-treesitter").install({
+			"bash", "c", "cmake", "cpp", "css", "dockerfile", "diff",
+			"glsl", "go", "html", "hyprlang", "java", "javascript",
+			"json", "lua", "luadoc", "markdown", "markdown_inline",
+			"python", "rust", "sql", "typescript", "vim", "vimdoc", "yaml",
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("njayman-treesitter", { clear = true }),
+			callback = function()
+				if pcall(vim.treesitter.start) then
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
+		})
 
 		require("ufo").setup({
 			provider_selector = function()
@@ -76,12 +66,5 @@ return {
 				},
 			},
 		})
-
-		-- There are additional nvim-treesitter modules that you can use to interact
-		-- with nvim-treesitter. You should go explore a few and see what interests you:
-		--
-		--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	end,
 }
