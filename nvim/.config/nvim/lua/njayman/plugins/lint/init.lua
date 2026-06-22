@@ -1,5 +1,4 @@
 return {
-
 	"mfussenegger/nvim-lint",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
@@ -21,12 +20,14 @@ return {
 				}
 			),
 		}
+
 		lint.linters_by_ft = {
+			lua = { "selene" },
 			markdown = { "markdownlint" },
-			javascript = { "eslint" },
-			javascriptreact = { "eslint" },
-			typescript = { "eslint" },
-			typescriptreact = { "eslint" },
+			go = { "staticcheck" },
+			sh = { "shellcheck" },
+			bash = { "shellcheck" },
+			dockerfile = { "hadolint" },
 			c = { "clangtidy" },
 			cpp = { "clangtidy" },
 		}
@@ -35,16 +36,6 @@ return {
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
 			callback = function()
-				local bufname = vim.api.nvim_buf_get_name(0)
-				local has_biome = #vim.fs.find({ "biome.json", "biome.jsonc" }, {
-					upward = true,
-					path = vim.fs.dirname(bufname),
-				}) > 0
-				local ft = vim.bo.filetype
-				local js_fts = { javascript = true, javascriptreact = true, typescript = true, typescriptreact = true }
-				if has_biome and js_fts[ft] then
-					return
-				end
 				lint.try_lint()
 			end,
 		})

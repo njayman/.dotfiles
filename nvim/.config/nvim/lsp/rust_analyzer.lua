@@ -2,8 +2,6 @@
 return {
 	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
-	root_dir = function(bufnr)
-		return vim.fs.root(bufnr, { "Cargo.toml", "Cargo.lock", ".git" })
-	end,
+	root_markers = { "Cargo.toml", "Cargo.lock", ".git" },
 	single_file_support = true,
 }

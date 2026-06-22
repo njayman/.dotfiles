@@ -1,7 +1,9 @@
 return {
 	"echasnovski/mini.nvim",
 	config = function()
-		local statusline = require("mini.statusline")
+		require("mini.icons").mock_nvim_web_devicons()
+
+	local statusline = require("mini.statusline")
 
 		statusline.setup({ use_icons = true })
 
@@ -54,10 +56,11 @@ return {
 				-- Leader group labels
 				{ mode = "n", keys = "<Leader>f", desc = "+find" },
 				{ mode = "n", keys = "<Leader>t", desc = "+terminal" },
-				{ mode = "n", keys = "<Leader>d", desc = "+diagnostics" },
+				{ mode = "n", keys = "<Leader>T", desc = "+test" },
+				{ mode = "n", keys = "<Leader>d", desc = "+debug/diagnostics" },
 				{ mode = "n", keys = "<Leader>w", desc = "+workspace" },
 				{ mode = "n", keys = "<Leader>s", desc = "+session" },
-				{ mode = "n", keys = "<Leader>c", desc = "+code" },
+				{ mode = "n", keys = "<Leader>c", desc = "+cmake" },
 				{ mode = "n", keys = "<Leader>r", desc = "+rename" },
 			},
 		})

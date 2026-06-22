@@ -2,9 +2,7 @@
 return {
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
-	root_dir = function(bufnr)
-		return vim.fs.root(bufnr, { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "pyrightconfig.json", ".git" })
-	end,
+	root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "pyrightconfig.json", ".git" },
 	settings = {
 		python = {
 			analysis = {

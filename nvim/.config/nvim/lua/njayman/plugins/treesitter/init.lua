@@ -23,9 +23,10 @@ return {
 
 		require("nvim-treesitter").install({
 			"bash", "c", "cmake", "cpp", "css", "dockerfile", "diff",
-			"glsl", "go", "html", "hyprlang", "java", "javascript",
-			"json", "lua", "luadoc", "markdown", "markdown_inline",
-			"python", "rust", "sql", "typescript", "vim", "vimdoc", "yaml",
+			"glsl", "go", "gomod", "gosum", "gowork", "html", "hyprlang",
+			"java", "javascript", "json", "lua", "luadoc", "markdown",
+			"markdown_inline", "python", "regex", "rust", "sql", "toml",
+			"tsx", "typescript", "vim", "vimdoc", "yaml",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

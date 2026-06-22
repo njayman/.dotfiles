@@ -26,11 +26,9 @@ return {
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
-			-- Optional dependency
 			dependencies = { "hrsh7th/nvim-cmp" },
 			config = function()
 				require("nvim-autopairs").setup({})
-				-- If you want to automatically add `(` after selecting a function or method
 				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 				local cmp = require("cmp")
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -49,7 +47,12 @@ return {
 				end,
 			},
 			completion = { completeopt = "menu,menuone,noinsert" },
+			window = {
+				documentation = cmp.config.disable,
+			},
 			mapping = cmp.mapping.preset.insert({
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping.abort(),
 				["<C-n>"] = cmp.mapping.select_next_item(),
 				["<C-p>"] = cmp.mapping.select_prev_item(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -57,7 +60,6 @@ return {
 			sources = {
 				{
 					name = "lazydev",
-					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
 					group_index = 0,
 				},
 				{ name = "nvim_lsp" },

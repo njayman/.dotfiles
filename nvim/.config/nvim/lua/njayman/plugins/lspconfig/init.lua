@@ -1,11 +1,13 @@
 return {
-	"williamboman/mason.nvim",
+	"j-hui/fidget.nvim",
 	dependencies = {
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		{ "j-hui/fidget.nvim", opts = {} },
 		"hrsh7th/cmp-nvim-lsp",
+		"williamboman/mason.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
+		require("fidget").setup({})
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("njayman-lsp-attach", { clear = true }),
 			callback = function(event)
@@ -81,11 +83,11 @@ return {
 		})
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-			vim.lsp.handlers.hover,
+			vim.lsp.handlers["textDocument/hover"],
 			{ border = "rounded" }
 		)
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-			vim.lsp.handlers.signature_help,
+			vim.lsp.handlers["textDocument/signatureHelp"],
 			{ border = "rounded" }
 		)
 
@@ -96,6 +98,7 @@ return {
 			"lua_ls",
 			"jsonls",
 			"pyright",
+			"ruff",
 			"marksman",
 			"bashls",
 			"gopls",
@@ -105,6 +108,9 @@ return {
 			"clangd",
 			"glsl_analyzer",
 			"cmake",
+			"dockerls",
+			"cssls",
+			"html",
 		})
 
 		if vim.fn.executable("hyprls") == 1 then
@@ -122,13 +128,14 @@ return {
 		end
 
 		require("mason").setup()
-
 		require("mason-tool-installer").setup({
 			ensure_installed = {
+				-- LSP
 				"typescript-language-server",
 				"lua-language-server",
 				"json-lsp",
 				"pyright",
+				"ruff",
 				"marksman",
 				"bash-language-server",
 				"gopls",
@@ -136,13 +143,26 @@ return {
 				"deno",
 				"rust-analyzer",
 				"clangd",
-				"glsl_analyzer",
 				"cmake-language-server",
+				"dockerfile-language-server",
+				"css-lsp",
+				"html-lsp",
+				-- Formatters
 				"stylua",
-				"eslint_d",
-				"markdownlint",
 				"prettier",
 				"clang-format",
+				"shfmt",
+				-- Linters
+				"eslint_d",
+				"markdownlint",
+				"selene",
+				"shellcheck",
+				"hadolint",
+				"staticcheck",
+				-- DAP
+				"debugpy",
+				"delve",
+				"codelldb",
 			},
 			automatic_installation = true,
 		})

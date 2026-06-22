@@ -5,7 +5,7 @@ exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
 exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
-exec flatpak run com.github.hluk.copyq
+exec clipse -listen
 exec --no-startup-id pasystray
 exec gammastep -O 3500
 set $SSH_AUTH_SOCK $XDG_RUNTIME_DIR/keyring/ssh
@@ -81,4 +81,5 @@ client.focused_inactive #242424 #242424 #9e9e9e #242424
 client.urgent           #fd5f51 #fd5f51 #ffffff #fd5f51
 client.placeholder      #212121 #212121 #727272 #212121
 
+for_window [app_id="clipse"] floating enable, resize set 622 652
 for_window [floating] border pixel 2, move position center

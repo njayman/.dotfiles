@@ -1,7 +1,5 @@
 ---@type vim.lsp.Config
 return {
-	root_dir = function(bufnr)
-		return vim.fs.root(bufnr, { "package.json", "tsconfig.json" })
-	end,
+	root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
 	single_file_support = false,
 }

@@ -1,3 +1,17 @@
+local function js_formatter(bufnr)
+	local has_deno = #vim.fs.find({ "deno.json", "deno.jsonc" }, {
+		upward = true,
+		path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+	}) > 0
+	if has_deno then
+		return { "deno_fmt" }
+	end
+	if vim.fn.executable("biome") == 1 then
+		return { "biome" }
+	end
+	return { "prettier" }
+end
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -22,43 +36,17 @@ return {
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "isort", "black" },
-			javascript = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
-			javascriptreact = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
-			typescript = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
-			typescriptreact = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
-			json = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
-			css = function(bufnr)
-				if #vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)) }) > 0 then
-					return { "biome" }
-				end
-				return { "prettier" }
-			end,
+			python = { "ruff_format" },
+			go = { "gofmt" },
+			sh = { "shfmt" },
+			bash = { "shfmt" },
+			javascript = js_formatter,
+			javascriptreact = js_formatter,
+			typescript = js_formatter,
+			typescriptreact = js_formatter,
+			json = js_formatter,
+			jsonc = js_formatter,
+			css = js_formatter,
 			html = { "prettier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			c = { "clang-format" },
