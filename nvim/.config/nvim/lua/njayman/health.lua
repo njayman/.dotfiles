@@ -7,7 +7,7 @@ local tools = {
 			{ cmd = "clangd",                        label = "clangd (C/C++)" },
 			{ cmd = "lua-language-server",           label = "lua-language-server (Lua)" },
 			{ cmd = "typescript-language-server",    label = "typescript-language-server (TS/JS)" },
-			{ cmd = "pyright",                       label = "pyright (Python types)" },
+			{ cmd = "ty",                            label = "ty (Python types)" },
 			{ cmd = "ruff",                          label = "ruff (Python lint/format)" },
 			{ cmd = "rust-analyzer",                 label = "rust-analyzer (Rust)" },
 			{ cmd = "gopls",                         label = "gopls (Go)" },

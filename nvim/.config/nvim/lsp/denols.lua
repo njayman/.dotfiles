@@ -1,5 +1,8 @@
 ---@type vim.lsp.Config
 return {
-	root_markers = { "deno.json", "deno.jsonc" },
-	single_file_support = false,
+	cmd = { "deno", "lsp" },
+	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+	root_dir = function(bufnr, cb)
+		cb(vim.fs.root(bufnr, { "deno.json", "deno.jsonc" }))
+	end,
 }

@@ -63,7 +63,8 @@ return {
 		local capabilities = vim.tbl_deep_extend(
 			"force",
 			vim.lsp.protocol.make_client_capabilities(),
-			require("cmp_nvim_lsp").default_capabilities()
+			require("cmp_nvim_lsp").default_capabilities(),
+			{ workspace = { workspaceEdit = { documentChanges = true } } }
 		)
 
 		vim.diagnostic.config({
@@ -97,7 +98,7 @@ return {
 			"ts_ls",
 			"lua_ls",
 			"jsonls",
-			"pyright",
+			"ty",
 			"ruff",
 			"marksman",
 			"bashls",
@@ -134,7 +135,6 @@ return {
 				"typescript-language-server",
 				"lua-language-server",
 				"json-lsp",
-				"pyright",
 				"ruff",
 				"marksman",
 				"bash-language-server",
@@ -159,6 +159,7 @@ return {
 				"shellcheck",
 				"hadolint",
 				"staticcheck",
+				"ty-ls",
 				-- DAP
 				"debugpy",
 				"delve",
