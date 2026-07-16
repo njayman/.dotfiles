@@ -35,6 +35,12 @@ set $menu wofi --show drun --allow-images
 ### Keybindings (generated from keybinds.json)
 include ~/.config/sway/keybinds.conf
 
+### Input
+input "13357:58375:Lucky65V2_Lucky65V2_Keyboard" {
+    repeat_delay 600
+    repeat_rate 25
+}
+
 ### Output configuration
 exec_always swaybg -i "$(find ~/Pictures/Wallpapers -type f | shuf -n 1)" -m fill
 

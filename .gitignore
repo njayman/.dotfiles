@@ -7,3 +7,4 @@ tmux/.config/tmux/plugins/*
 office-ergo/nvim/plugin/packer_compiled.lua
 ranger/.config/ranger/plugins/ranger_udisk_menu/.git
 .zsh_history
+.zshrc.local

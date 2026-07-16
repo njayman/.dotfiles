@@ -48,5 +48,5 @@ end
 
 if not ok then
 	loadDefaultConfig()
-	error(("Error loading config njayman. Switching to default"):format(err))
+	error(("Error loading config njayman: %s. Switching to default"):format(err))
 end

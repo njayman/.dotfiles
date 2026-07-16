@@ -22,7 +22,14 @@ return {
 				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-				nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				nmap("<leader>ca", function()
+					vim.lsp.buf.code_action({
+						context = {
+							only = { "quickfix", "refactor", "source" },
+							diagnostics = vim.diagnostic.get(0),
+						},
+					})
+				end, "[C]ode [A]ction")
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("<leader>df", vim.diagnostic.open_float, "[D]iagnostic [F]loat")
 
@@ -83,14 +90,7 @@ return {
 			update_in_insert = false,
 		})
 
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-			vim.lsp.handlers["textDocument/hover"],
-			{ border = "rounded" }
-		)
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-			vim.lsp.handlers["textDocument/signatureHelp"],
-			{ border = "rounded" }
-		)
+		vim.o.winborder = "rounded"
 
 		vim.lsp.config("*", { capabilities = capabilities })
 
@@ -159,7 +159,7 @@ return {
 				"shellcheck",
 				"hadolint",
 				"staticcheck",
-				"ty-ls",
+				"ty",
 				-- DAP
 				"debugpy",
 				"delve",

@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.8",
+	tag = "v0.2.2",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
@@ -9,10 +9,7 @@ return {
 		},
 	},
 	config = function()
-		local telescope = require("telescope").setup({
-			defaults = {
-				initial_mode = "normal",
-			},
+		require("telescope").setup({
 			mappings = {
 				i = {
 					["<Esc>"] = require("telescope.actions").close,

@@ -1,6 +1,0 @@
-# Zsh
-
-## Deps
-
-- dirhistory
-- shelfirm
