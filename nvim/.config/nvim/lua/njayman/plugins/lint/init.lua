@@ -4,23 +4,8 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		lint.linters.clangtidy = {
-			name = "clangtidy",
-			cmd = "clang-tidy",
-			args = { "--quiet" },
-			stdin = false,
-			stream = "stdout",
-			ignore_exitcode = true,
-			parser = require("lint.parser").from_pattern(
-				"([^:]+):(%d+):(%d+): (%w+): (.+)",
-				{ "file", "lnum", "col", "severity", "message" },
-				{
-					source = "clang-tidy",
-					severity = vim.diagnostic.severity.WARN,
-				}
-			),
-		}
-
+		-- ponytail: c/cpp linting comes from clangd's --clang-tidy flag over LSP,
+		-- not nvim-lint, to avoid running clang-tidy twice per save.
 		lint.linters_by_ft = {
 			lua = { "selene" },
 			markdown = { "markdownlint" },
@@ -28,8 +13,6 @@ return {
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
 			dockerfile = { "hadolint" },
-			c = { "clangtidy" },
-			cpp = { "clangtidy" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

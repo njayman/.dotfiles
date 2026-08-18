@@ -34,6 +34,42 @@ return {
 				nmap("<leader>df", vim.diagnostic.open_float, "[D]iagnostic [F]loat")
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+				if client and client:supports_method(vim.lsp.protocol.Methods.callHierarchy_incomingCalls) then
+					nmap("<leader>ci", vim.lsp.buf.incoming_calls, "[C]alls [I]ncoming")
+					nmap("<leader>co", vim.lsp.buf.outgoing_calls, "[C]alls [O]utgoing")
+				end
+
+				if client and client.name == "clangd" then
+					nmap("<leader>ch", function()
+						client:request("textDocument/switchSourceHeader", vim.lsp.util.make_text_document_params(event.buf), function(err, result)
+							if not err and result then
+								vim.cmd.edit(vim.uri_to_fname(result))
+								return
+							end
+
+							-- clangd doesn't pair source/header across directories
+							-- (e.g. src/ vs include/), so fall back to a stem search.
+							local bufname = vim.api.nvim_buf_get_name(event.buf)
+							local stem = vim.fn.fnamemodify(bufname, ":t:r")
+							local is_header = bufname:match("%.h[pxc]*$") ~= nil
+							local exts = is_header and { "c", "cc", "cpp", "cxx" } or { "h", "hh", "hpp", "hxx" }
+
+							local matches = vim.fs.find(function(name)
+								local ext = name:match("%.([^.]+)$")
+								return name:match("^" .. vim.pesc(stem) .. "%.") ~= nil and vim.tbl_contains(exts, ext)
+							end, { path = vim.fn.getcwd(), limit = 1, type = "file" })
+
+							if matches[1] then
+								vim.cmd.edit(matches[1])
+							end
+						end, event.buf)
+					end, "[C]langd Switch [H]eader/Source")
+
+					if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+						vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+					end
+				end
 				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 					local highlight_augroup = vim.api.nvim_create_augroup("njayman-lsp-highlight", { clear = false })
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -91,6 +127,43 @@ return {
 		})
 
 		vim.o.winborder = "rounded"
+
+		vim.keymap.set("x", "<leader>yd", function()
+			local bufnr = vim.api.nvim_get_current_buf()
+			local start_line = math.min(vim.fn.line("v"), vim.fn.line(".")) - 1
+			local end_line = math.max(vim.fn.line("v"), vim.fn.line(".")) - 1
+
+			local code = vim.api.nvim_buf_get_lines(bufnr, start_line, end_line + 1, false)
+
+			local diagnostics = vim.diagnostic.get(bufnr, { lnum = nil })
+			local diag_lines = {}
+			for _, d in ipairs(diagnostics) do
+				if d.lnum >= start_line and d.lnum <= end_line then
+					table.insert(
+						diag_lines,
+						string.format(
+							"line %d: %s%s: %s",
+							d.lnum + 1,
+							vim.diagnostic.severity[d.severity],
+							d.source and (" (" .. d.source .. ")") or "",
+							d.message:gsub("\n", " ")
+						)
+					)
+				end
+			end
+
+			local out = vim.list_extend({}, code)
+			if #diag_lines > 0 then
+				table.insert(out, "")
+				table.insert(out, "-- Diagnostics --")
+				vim.list_extend(out, diag_lines)
+			end
+
+			local text = table.concat(out, "\n")
+			vim.fn.setreg('"', text, "l")
+			vim.fn.setreg("+", text, "l")
+			vim.cmd("normal! \27")
+		end, { desc = "[Y]ank selection with [D]iagnostics" })
 
 		vim.lsp.config("*", { capabilities = capabilities })
 

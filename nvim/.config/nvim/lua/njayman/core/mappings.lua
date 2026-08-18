@@ -4,6 +4,10 @@ local cm = require("njayman.core.cmake")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "[N]o highlight search" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "[E]xit terminal mode" })
 
+for _, key in ipairs({ "<Up>", "<Down>", "<Left>", "<Right>" }) do
+	vim.keymap.set({ "n", "v", "i" }, key, "<Nop>", { desc = "Disabled, use hjkl" })
+end
+
 vim.keymap.set("n", "<leader>tf", tm.toggle_float, { desc = "[F]loating terminal manager" })
 vim.keymap.set("n", "<leader>tt", tm.toggle_tab, { desc = "[T]abbed terminal manager" })
 vim.keymap.set("n", "<leader>tb", tm.toggle_bottom, { desc = "[B]ottom terminal manager" })

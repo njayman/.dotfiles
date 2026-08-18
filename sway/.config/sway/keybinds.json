@@ -81,6 +81,11 @@
     { "key": "XF86MonBrightnessDown", "action": "exec brightnessctl set 5%-",  "desc": "Brightness down", "locked": true },
     { "key": "XF86MonBrightnessUp",   "action": "exec brightnessctl set 5%+",  "desc": "Brightness up",   "locked": true }
   ],
+  "Nightlight": [
+    { "key": "$mod+n",           "action": "exec ~/.config/sway/nightlight.sh toggle", "desc": "Toggle nightlight" },
+    { "key": "$mod+bracketleft",  "action": "exec ~/.config/sway/nightlight.sh warmer", "desc": "Nightlight warmer" },
+    { "key": "$mod+bracketright", "action": "exec ~/.config/sway/nightlight.sh cooler", "desc": "Nightlight cooler" }
+  ],
   "Utilities": [
     { "key": "Print",        "action": "exec ~/.config/sway/screenshot.sh",    "desc": "Screenshot", "no_repeat": true },
     { "key": "$mod+c",       "action": "exec ghostty --class=clipse -e clipse",  "desc": "Clipboard" },

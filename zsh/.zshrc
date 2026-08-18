@@ -22,6 +22,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
 
 # History
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt APPEND_HISTORY
@@ -87,3 +88,6 @@ export EDITOR=nvim
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# dotnet
+export PATH="$HOME/.dotnet:$PATH"

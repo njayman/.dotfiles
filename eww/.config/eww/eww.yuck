@@ -45,7 +45,11 @@
 
 (defpoll gamma-on
   :interval "5s"
-  `pgrep -x gammastep >/dev/null 2>&1 && echo 1 || echo 0`)
+  `~/.config/eww/scripts/gamma.sh`)
+
+(defpoll gamma-val
+  :interval "5s"
+  `~/.config/eww/scripts/gamma-val.sh`)
 
 (defpoll dnd-on
   :interval "2s"
@@ -98,25 +102,16 @@
       :onclick "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
       (label :text mic-text))))
 
-(defwidget brightness-w []
-  (box :class "module"
-       :visible {brightness-pct != ""}
-    (label :text "󰃟 ${brightness-pct}%")))
-
 (defwidget network-w []
   (box :class "module"
     (label :text net-text)))
 
-(defwidget battery-w []
-  (box :class "module"
-       :visible {bat-text != ""}
-    (label :text bat-text)))
-
 (defwidget gamma-w []
-  (button
-    :class "module ${gamma-on == 1 ? "warm" : ""}"
-    :onclick "pgrep -x gammastep >/dev/null 2>&1 && pkill gammastep || gammastep -O 3500"
-    (label :text {gamma-on == 1 ? "󱩌 warm" : "󰌵 cool"})))
+  (eventbox :onscroll "[ '{}' = 'up' ] && ~/.config/sway/nightlight.sh cooler || ~/.config/sway/nightlight.sh warmer"
+    (button
+      :class "module ${gamma-on == 1 ? "warm" : ""}"
+      :onclick "~/.config/sway/nightlight.sh toggle"
+      (label :text {gamma-on == 1 ? "󱩌 ${gamma-val}" : "󰌵 off"}))))
 
 (defwidget dnd-w []
   (button
@@ -167,11 +162,9 @@
     (gamemode-w)
     (dnd-w)
     (gamma-w)
-    (brightness-w)
     (mic-w)
     (volume-w)
     (network-w)
-    (battery-w)
     (systray-w)))
 
 (defwidget main-bar []

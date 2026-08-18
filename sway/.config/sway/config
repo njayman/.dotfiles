@@ -7,7 +7,6 @@ exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 exec clipse -listen
 exec --no-startup-id pasystray
-exec gammastep -O 3500
 set $SSH_AUTH_SOCK $XDG_RUNTIME_DIR/keyring/ssh
 seat * xcursor_theme oreo_black_cursors 24
 
@@ -81,11 +80,11 @@ hide_edge_borders smart
 gaps inner 6
 gaps outer 2
 
-client.focused          #5b9bf8 #5b9bf8 #ffffff #5b9bf8
-client.unfocused        #2C2C2C #2C2C2C #bfbfbf #2C2C2C
-client.focused_inactive #242424 #242424 #9e9e9e #242424
-client.urgent           #fd5f51 #fd5f51 #ffffff #fd5f51
-client.placeholder      #212121 #212121 #727272 #212121
+client.focused          #974b46 #974b46 #d6d0d6 #bb8a87
+client.unfocused        #0a0a0a #0a0a0a #6f6a78 #0a0a0a
+client.focused_inactive #79241f #79241f #d6d0d6 #79241f
+client.urgent           #bb8a87 #bb8a87 #000000 #bb8a87
+client.placeholder      #0a0a0a #0a0a0a #6f6a78 #0a0a0a
 
 for_window [app_id="clipse"] floating enable, resize set 622 652
 for_window [floating] border pixel 2, move position center
