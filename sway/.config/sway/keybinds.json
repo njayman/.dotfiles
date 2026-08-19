@@ -88,7 +88,7 @@
   ],
   "Utilities": [
     { "key": "Print",        "action": "exec ~/.config/sway/screenshot.sh",    "desc": "Screenshot", "no_repeat": true },
-    { "key": "$mod+c",       "action": "exec ghostty --class=clipse -e clipse",  "desc": "Clipboard" },
+    { "key": "$mod+c",       "action": "exec ~/.config/sway/clipse.sh",  "desc": "Clipboard" },
     { "key": "$mod+Tab",     "action": "exec ~/.config/sway/workspace-overview.sh",    "desc": "Window picker" }
   ]
 }

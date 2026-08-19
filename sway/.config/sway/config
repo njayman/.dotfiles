@@ -86,5 +86,5 @@ client.focused_inactive #79241f #79241f #d6d0d6 #79241f
 client.urgent           #bb8a87 #bb8a87 #000000 #bb8a87
 client.placeholder      #0a0a0a #0a0a0a #6f6a78 #0a0a0a
 
-for_window [app_id="clipse"] floating enable, resize set 622 652
+for_window [app_id="com.dotfiles.clipse"] floating enable, resize set 622 652
 for_window [floating] border pixel 2, move position center

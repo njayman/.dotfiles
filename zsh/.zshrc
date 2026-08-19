@@ -72,6 +72,9 @@ esac
 # cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# go
+export PATH="$HOME/go/bin:$PATH"
+
 # Corepack
 alias npm="corepack npm"
 alias npx="corepack npx"
@@ -91,3 +94,5 @@ eval "$(zoxide init zsh)"
 
 # dotnet
 export PATH="$HOME/.dotnet:$PATH"
+
+source <(proz completion)
