@@ -1,13 +1,19 @@
 exec_always dbus-update-activation-environment --systemd \
-  WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP
-exec /usr/bin/gnome-keyring-daemon --start --components=secrets,ssh
+  WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP \
+  QT_QPA_PLATFORMTHEME XCURSOR_THEME XCURSOR_SIZE
+exec_always gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
+exec_always gsettings set org.gnome.desktop.interface icon-theme 'Colloid-Dark'
+exec_always gsettings set org.gnome.desktop.interface font-name 'Fira Sans 10'
+exec_always gsettings set org.gnome.desktop.interface cursor-theme 'oreo_black_cursors'
+exec_always gsettings set org.gnome.desktop.interface cursor-size 24
+exec_always gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+exec_always /usr/bin/gnome-keyring-daemon --start --components=secrets,ssh
 exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
 exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 exec clipse -listen
 exec --no-startup-id pasystray
-set $SSH_AUTH_SOCK $XDG_RUNTIME_DIR/keyring/ssh
 seat * xcursor_theme oreo_black_cursors 24
 
 ### Window rules
@@ -29,7 +35,7 @@ set $down j
 set $up k
 set $right l
 set $term ghostty
-set $menu wofi --show drun --allow-images
+set $menu XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share wofi --show drun --allow-images
 
 ### Keybindings (generated from keybinds.json)
 include ~/.config/sway/keybinds.conf
@@ -43,7 +49,7 @@ input "13357:58375:Lucky65V2_Lucky65V2_Keyboard" {
 ### Output configuration
 exec_always swaybg -i "$(find ~/Pictures/Wallpapers -type f | shuf -n 1)" -m fill
 
-output HDMI-A-2 {
+output "Microstep MSI MP273Q E2 PB6H465800505" {
     mode 2560x1440@100.00hz
 }
 

@@ -86,6 +86,9 @@ alias yarnpkg="corepack yarnpkg"
 # Editor
 export EDITOR=nvim
 
+# gnome-keyring ssh-agent (sddm doesn't propagate this to the session like gdm does)
+[ -S "$XDG_RUNTIME_DIR/keyring/ssh" ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
+
 # Machine-specific (not in dotfiles)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
@@ -96,3 +99,6 @@ eval "$(zoxide init zsh)"
 export PATH="$HOME/.dotnet:$PATH"
 
 source <(proz completion)
+
+# bun completions
+[ -s "/home/njayman/.bun/_bun" ] && source "/home/njayman/.bun/_bun"
