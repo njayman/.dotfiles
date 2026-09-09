@@ -1,6 +1,8 @@
 return {
 	"j-hui/fidget.nvim",
 	dependencies = {
+		-- provides default configs under lsp/*.lua; we never call require("lspconfig")
+		"neovim/nvim-lspconfig",
 		"hrsh7th/cmp-nvim-lsp",
 		"williamboman/mason.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -42,28 +44,34 @@ return {
 
 				if client and client.name == "clangd" then
 					nmap("<leader>ch", function()
-						client:request("textDocument/switchSourceHeader", vim.lsp.util.make_text_document_params(event.buf), function(err, result)
-							if not err and result then
-								vim.cmd.edit(vim.uri_to_fname(result))
-								return
-							end
+						client:request(
+							"textDocument/switchSourceHeader",
+							vim.lsp.util.make_text_document_params(event.buf),
+							function(err, result)
+								if not err and result then
+									vim.cmd.edit(vim.uri_to_fname(result))
+									return
+								end
 
-							-- clangd doesn't pair source/header across directories
-							-- (e.g. src/ vs include/), so fall back to a stem search.
-							local bufname = vim.api.nvim_buf_get_name(event.buf)
-							local stem = vim.fn.fnamemodify(bufname, ":t:r")
-							local is_header = bufname:match("%.h[pxc]*$") ~= nil
-							local exts = is_header and { "c", "cc", "cpp", "cxx" } or { "h", "hh", "hpp", "hxx" }
+								-- clangd doesn't pair source/header across directories
+								-- (e.g. src/ vs include/), so fall back to a stem search.
+								local bufname = vim.api.nvim_buf_get_name(event.buf)
+								local stem = vim.fn.fnamemodify(bufname, ":t:r")
+								local is_header = bufname:match("%.h[pxc]*$") ~= nil
+								local exts = is_header and { "c", "cc", "cpp", "cxx" } or { "h", "hh", "hpp", "hxx" }
 
-							local matches = vim.fs.find(function(name)
-								local ext = name:match("%.([^.]+)$")
-								return name:match("^" .. vim.pesc(stem) .. "%.") ~= nil and vim.tbl_contains(exts, ext)
-							end, { path = vim.fn.getcwd(), limit = 1, type = "file" })
+								local matches = vim.fs.find(function(name)
+									local ext = name:match("%.([^.]+)$")
+									return name:match("^" .. vim.pesc(stem) .. "%.") ~= nil
+										and vim.tbl_contains(exts, ext)
+								end, { path = vim.fn.getcwd(), limit = 1, type = "file" })
 
-							if matches[1] then
-								vim.cmd.edit(matches[1])
-							end
-						end, event.buf)
+								if matches[1] then
+									vim.cmd.edit(matches[1])
+								end
+							end,
+							event.buf
+						)
 					end, "[C]langd Switch [H]eader/Source")
 
 					if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
@@ -167,8 +175,72 @@ return {
 
 		vim.lsp.config("*", { capabilities = capabilities })
 
+		-- deliberate deltas on top of nvim-lspconfig's lsp/*.lua defaults
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					completion = { callSnippet = "Replace" },
+					diagnostics = { globals = { "vim" } },
+				},
+			},
+		})
+		vim.lsp.config("clangd", {
+			cmd = {
+				"clangd",
+				"--background-index",
+				"--clang-tidy",
+				"--header-insertion=iwyu",
+				"--completion-style=detailed",
+				"--all-scopes-completion",
+				"--pch-storage=memory",
+				"--offset-encoding=utf-16",
+			},
+		})
+		-- conform already formats html via prettier; don't let the LSP double up
+		vim.lsp.config("html", { init_options = { provideFormatter = false } })
+		-- upstream's tsgo is a deprecated alias to tsc; define it standalone to skip the nag
+		vim.lsp.config("tsgo", {
+			cmd = { "tsgo", "--lsp", "--stdio" },
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_dir = function(bufnr, on_dir)
+				local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
+				root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers, { ".git" } }
+					or vim.list_extend(root_markers, { ".git" })
+
+				local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
+				local deno_lock_root = vim.fs.root(bufnr, { "deno.lock" })
+				local project_root = vim.fs.root(bufnr, root_markers)
+				if deno_lock_root and (not project_root or #deno_lock_root > #project_root) then
+					return
+				end
+				if deno_root and (not project_root or #deno_root >= #project_root) then
+					return
+				end
+				on_dir(project_root or vim.fn.getcwd())
+			end,
+			settings = {
+				["js/ts"] = {
+					inlayHints = {
+						parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
+						parameterTypes = { enabled = true },
+						variableTypes = { enabled = true },
+						propertyDeclarationTypes = { enabled = true },
+						functionLikeReturnTypes = { enabled = true },
+						enumMemberValues = { enabled = true },
+					},
+					referencesCodeLens = { enabled = true, showOnAllFunctions = true },
+					implementationsCodeLens = {
+						enabled = true,
+						showOnInterfaceMethods = true,
+						showOnAllClassMethods = true,
+					},
+				},
+			},
+			on_init = function() end,
+		})
+
 		vim.lsp.enable({
-			"ts_ls",
+			"tsgo",
 			"lua_ls",
 			"jsonls",
 			"ty",
@@ -205,7 +277,6 @@ return {
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				-- LSP
-				"typescript-language-server",
 				"lua-language-server",
 				"json-lsp",
 				"ruff",
