@@ -1,5 +1,0 @@
-require("core.remaps")
-require("core.sets")
-require("core.commands")
-require("core.settings")
-require("core.statusline")
