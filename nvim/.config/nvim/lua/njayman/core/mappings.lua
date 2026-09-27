@@ -1,5 +1,8 @@
 local tm = require("njayman.core.terminal")
 local cm = require("njayman.core.cmake")
+local sp = require("njayman.core.scratchpad")
+
+vim.keymap.set("n", "<leader>.", sp.toggle, { desc = "Toggle scratchpad" })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "[N]o highlight search" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "[E]xit terminal mode" })

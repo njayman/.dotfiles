@@ -102,3 +102,5 @@ source <(proz completion)
 
 # bun completions
 [ -s "/home/njayman/.bun/_bun" ] && source "/home/njayman/.bun/_bun"
+export PATH=$PATH:$HOME/.maestro/bin
+export PATH="$HOME/bin:$PATH"

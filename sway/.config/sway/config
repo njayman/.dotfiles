@@ -12,7 +12,7 @@ exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
 exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
-exec clipse -listen
+exec ~/go/bin/clipse -listen
 exec --no-startup-id pasystray
 seat * xcursor_theme oreo_black_cursors 24
 
