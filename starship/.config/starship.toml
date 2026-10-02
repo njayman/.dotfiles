@@ -1,13 +1,18 @@
 add_newline = false
 scan_timeout = 1000
 
+# Whitelist: only these modules render (no versions, no cloud logins)
+format = """
+$username$hostname$directory$git_branch$git_status$python\
+$cmd_duration$jobs$line_break$character"""
+
 [character]
 success_symbol = '[❯](bold green)'
 error_symbol = '[❯](bold red)'
 
+# Active venv name only, no version
 [python]
+format = '[(\($virtualenv\) )]($style)'
 detect_extensions = []
 detect_files = []
-
-[nodejs]
-detect_files = ["package.json"]
+detect_folders = []
