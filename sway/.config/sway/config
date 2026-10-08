@@ -34,7 +34,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term ghostty
+set $term wezterm
 set $menu XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share wofi --show drun --allow-images
 
 ### Keybindings (generated from keybinds.json)

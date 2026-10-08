@@ -1,7 +1,7 @@
 {
   "Basics": [
     { "key": "$mod+Return",   "action": "exec $term",                          "desc": "Terminal" },
-    { "key": "$mod+Shift+q",  "action": "kill",                                "desc": "Kill window" },
+    { "key": "$mod+Shift+q",  "action": "exec ~/.config/sway/kill.sh",          "desc": "Kill window" },
     { "key": "$mod+d",        "action": "exec $menu",                          "desc": "App launcher" },
     { "key": "$mod+Shift+c",  "action": "exec ~/.config/sway/reload.sh",       "desc": "Reload config" },
     { "key": "$mod+Shift+e",  "action": "exec ~/.config/sway/powermenu.sh",    "desc": "Power menu" }
