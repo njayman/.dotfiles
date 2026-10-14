@@ -13,6 +13,8 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id bluetoothctl power off
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 exec ~/go/bin/clipse -listen
+# flameshot daemon: keeps owning the clipboard after the editor closes
+exec flameshot
 exec --no-startup-id pasystray
 seat * xcursor_theme oreo_black_cursors 24
 
@@ -93,4 +95,8 @@ client.urgent           #bb8a87 #bb8a87 #000000 #bb8a87
 client.placeholder      #0a0a0a #0a0a0a #6f6a78 #0a0a0a
 
 for_window [app_id="com.dotfiles.clipse"] floating enable, resize set 622 652
+for_window [app_id="(?i)satty"] floating enable
+for_window [app_id="swappy"] floating enable
 for_window [floating] border pixel 2, move position center
+# after the generic floating rule so it wins: full-screen overlay at 0,0
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
