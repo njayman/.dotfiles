@@ -62,6 +62,7 @@ return {
 				{ mode = "n", keys = "<Leader>s", desc = "+session" },
 				{ mode = "n", keys = "<Leader>c", desc = "+cmake" },
 				{ mode = "n", keys = "<Leader>r", desc = "+rename" },
+				{ mode = "n", keys = "<Leader>C", desc = "+claude" },
 			},
 		})
 	end,
