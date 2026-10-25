@@ -4,6 +4,12 @@ local act = wezterm.action
 return {
   font = wezterm.font("JetBrainsMono Nerd Font"),
   font_size = 13,
+  -- perf: OpenGL front end is the usual lag source on wayland
+  front_end = "WebGpu",
+  webgpu_power_preference = "HighPerformance",
+  max_fps = 120,
+  animation_fps = 1,
+  cursor_blink_rate = 0,
   enable_tab_bar = true,
   hide_tab_bar_if_only_one_tab = true,
   window_close_confirmation = "AlwaysPrompt",
