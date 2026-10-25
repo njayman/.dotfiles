@@ -16,6 +16,8 @@ exec ~/go/bin/clipse -listen
 # flameshot daemon: keeps owning the clipboard after the editor closes
 exec flameshot
 exec --no-startup-id pasystray
+# VNC on localhost only; reach it through an SSH tunnel (AVNC)
+exec wayvnc
 seat * xcursor_theme oreo_black_cursors 24
 
 ### Window rules
@@ -100,3 +102,5 @@ for_window [app_id="swappy"] floating enable
 for_window [floating] border pixel 2, move position center
 # after the generic floating rule so it wins: full-screen overlay at 0,0
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+
+include ~/.config/sway/proz.conf
