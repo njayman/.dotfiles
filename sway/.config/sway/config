@@ -17,7 +17,8 @@ exec ~/go/bin/clipse -listen
 exec flameshot
 exec --no-startup-id pasystray
 # VNC on localhost only; reach it through an SSH tunnel (AVNC)
-exec wayvnc
+# serberus only: on zot it would hold 127.0.0.1:5900 and break the ssh -L tunnel
+exec [ "$(hostname)" = serberus ] && wayvnc
 seat * xcursor_theme oreo_black_cursors 24
 
 ### Window rules
@@ -74,6 +75,13 @@ mode "resize" {
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
+}
+
+### Passthrough mode: local sway ignores all binds so they reach the VNC viewer
+# ponytail: manual toggle, works with any viewer (no shortcuts-inhibitor reliance)
+bindsym $mod+Shift+p mode "passthrough"
+mode "passthrough" {
+    bindsym $mod+Shift+p mode "default"
 }
 
 ### Status Bar
