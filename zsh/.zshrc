@@ -39,7 +39,7 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Prompt
-eval "$(starship init zsh)"
+(( $+commands[starship] )) && eval "$(starship init zsh)"
 
 # Aliases
 alias ls='ls --color=auto'
@@ -93,14 +93,8 @@ export EDITOR=nvim
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # zoxide
-eval "$(zoxide init zsh)"
-
-# dotnet
-export PATH="$HOME/.dotnet:$PATH"
-
-source <(proz completion)
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 # bun completions
-[ -s "/home/njayman/.bun/_bun" ] && source "/home/njayman/.bun/_bun"
-export PATH=$PATH:$HOME/.maestro/bin
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export PATH="$HOME/bin:$PATH"
