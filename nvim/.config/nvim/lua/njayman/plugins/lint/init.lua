@@ -8,12 +8,19 @@ return {
 		-- not nvim-lint, to avoid running clang-tidy twice per save.
 		lint.linters_by_ft = {
 			lua = { "selene" },
-			markdown = { "markdownlint" },
 			go = { "staticcheck" },
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
 			dockerfile = { "hadolint" },
 		}
+
+		-- No diagnostics in markdown (covers marksman LSP too).
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "markdown",
+			callback = function(args)
+				vim.diagnostic.enable(false, { bufnr = args.buf })
+			end,
+		})
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
